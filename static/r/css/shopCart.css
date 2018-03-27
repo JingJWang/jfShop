@@ -1,0 +1,363 @@
+body {
+  width: 100%;
+  height: 100%;
+  background: #f8f8f8;
+}
+header {
+  width: 100%;
+  padding: 0.375rem 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9;
+  background: #fff;
+}
+.back {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-top: 0.375rem;
+  display: block;
+  float: left;
+  width: 1.5rem;
+  height: 1.25rem;
+  background: url(../img/back.png) no-repeat;
+  background-size: 0.375rem 0.8rem;
+  background-position: center;
+}
+.tit {
+  display: block;
+  height: 1.25rem;
+  line-height: 1.25rem;
+  font-size: 0.6rem;
+  width: 100%;
+  text-align: center;
+  color: #2c2c2c;
+}
+.changbj {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 0.375rem;
+  display: inline-block;
+  float: left;
+  text-align: center;
+  width: 2.5rem;
+  height: 1.25rem;
+  line-height: 1.25rem;
+  color: #494949;
+  font-size: 0.55rem;
+}
+.list_box {
+  float: left;
+  margin-top: 2rem;
+  padding-bottom: 2.4rem;
+}
+.list {
+  width: 100%;
+  float: left;
+  margin-top: 0.25rem;
+  background: #fff;
+  padding-bottom: 0.7rem;
+  border-bottom: solid 1px #f0f0f0;
+}
+.jfp_shop {
+  float: left;
+  width: 100%;
+  height: 1.375rem;
+  line-height: 1.375rem;
+  color: #575757;
+  text-indent: 0.75rem;
+  font-size: 0.53rem;
+  border-bottom: solid 1px #eee;
+  margin-bottom: 0.625rem;
+}
+.jfp_shop span {
+  font-size: 0.55rem;
+  padding-right: 0.1rem;
+}
+.left {
+  width: 2.125rem;
+  height: 3.25rem;
+  float: left;
+  position: relative;
+}
+.rad {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1.45rem;
+  height: 1.45rem;
+  margin-left: -0.725rem;
+  margin-top: -0.725rem;
+  background: url(../img/radio.png) no-repeat center;
+  background-size: 1rem 1rem;
+}
+.rig_img {
+  display: block;
+  width: 3.175rem;
+  height: 3.175rem;
+  border: solid 1px #fafafa;
+  float: left;
+  margin-right: 0.45rem;
+}
+.right {
+  width: 9rem;
+  float: left;
+}
+.shopname {
+  display: inline-block;
+  width: 100%;
+  height: 0.85rem;
+  line-height: 0.85rem;
+  font-size: 0.55rem;
+  color: #292929;
+}
+.recyspan {
+  display: inline-block;
+}
+.recyspan b {
+  font-weight: normal;
+}
+.fontrecy {
+  height: 1.375rem;
+  line-height: 1.375rem;
+  font-size: 0.5rem;
+  color: #717171;
+}
+.recy {
+  height: 1.375rem;
+  line-height: 1.375rem;
+  font-size: 0.58rem;
+  color: #ec0e09;
+  padding-left: 0.375rem;
+  padding-right: 0.25rem;
+}
+.payrecy {
+  height: 1.375rem;
+  line-height: 1.375rem;
+  font-size: 0.53rem;
+  color: #373737;
+}
+.shunum {
+  padding-top: 0.125rem;
+  padding-right: 0;
+  padding-bottom: 0.125rem;
+  padding-left: 0rem;
+}
+.btnj {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  text-align: center;
+  background: #f1f1f1;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 0.45rem 0.45rem;
+  float: left;
+}
+.jian {
+  background-image: url(../img/btn_jj.png);
+}
+.jia {
+  background-image: url(../img/btn_j.png);
+}
+.shownum {
+  display: inline-block;
+  width: 2.25rem;
+  height: 1rem;
+  text-align: center;
+  font-size: 0.5rem;
+  line-height: 1rem;
+  margin: 0 0.2rem 0 0.2rem;
+  border: none;
+  color: #2649ef;
+  background: none;
+  float: left;
+}
+footer,
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  border-top: solid 1px #ededed;
+  background: #fff;
+  width: 100%;
+  height: 2rem;
+}
+.change {
+  width: 2.5rem;
+  height: 2rem;
+  margin-left: 0.875rem;
+  float: left;
+}
+.changrad {
+  display: inline-block;
+  width: 1rem;
+  height: 2rem;
+  background: url(../img/radio.png) no-repeat center;
+  background-size: 0.8rem 0.8rem;
+  float: left;
+}
+.changfont {
+  display: inline-block;
+  font-weight: normal;
+  height: 2rem;
+  line-height: 2rem;
+  font-size: 0.52rem;
+  color: #505050;
+  float: left;
+  margin-left: 0.2rem;
+}
+.all {
+  float: left;
+  margin-left: 0.5rem;
+}
+.all span {
+  display: inline-block;
+  float: left;
+  height: 2rem;
+  line-height: 2rem;
+}
+.all_tit {
+  color: #5c5c5c;
+  font-size: 0.5rem;
+}
+.all_num,
+.all_pay {
+  color: #f80122;
+  font-size: 0.6rem;
+  margin-left: 3px;
+}
+.account {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4.25rem;
+  height: 2rem;
+  background: #9161e8;
+  color: #fff;
+  font-size: 0.575rem;
+  line-height: 2rem;
+  text-align: center;
+}
+.righta {
+  display: inline-block;
+  float: left;
+}
+.rad_check {
+  background-image: url(../img/radio_check.png);
+}
+.shadow {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+.last {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 99;
+}
+.last_top {
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 15px;
+  background: #fff;
+}
+.last_mess {
+  width: 100%;
+  height: 1.4rem;
+  line-height: 1.4rem;
+  border-bottom: solid 1px #ededed;
+  color: #666;
+  text-align: center;
+  font-size: 0.45rem;
+}
+.sbtn {
+  display: inline-block;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  font-size: 0.575rem;
+  letter-spacing: 1px;
+}
+.sure {
+  width: 100%;
+  color: #e50000;
+}
+.cancel {
+  width: 90%;
+  margin: 0.5rem 0 1.5rem 5%;
+  background: #fff;
+  color: #000be5;
+  border-radius: 10px;
+}
+.list_box {
+  width: 100%;
+}
+.bgnew {
+  background: #4d68f5;
+}
+.no_shop {
+  width: 100%;
+  margin-top: 5rem;
+  float: left;
+}
+.ns_tit {
+  width: 100%;
+  height: 2rem;
+  padding-top: 5rem;
+  background: url(../img/scart.png) no-repeat;
+  background-size: 2.875rem 2.575rem;
+  background-position: center 2rem;
+  line-height: 2rem;
+  font-size: 0.525rem;
+  color: #666;
+  float: left;
+  text-align: center;
+}
+.no_s_btn {
+  display: block;
+  float: left;
+  width: 6rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  margin-left: 5rem;
+  margin-top: 1rem;
+  font-size: 0.55rem;
+  letter-spacing: 1px;
+}
+.no_s_btn:link {
+  color: #fff;
+}
+.no_s_btn:hover {
+  color: #fff;
+}
+.no_s_btn:visited {
+  color: #fff;
+}
+.no_s_btn:active {
+  color: #fff;
+}
+.hs_gg {
+  background: #8e5ee6;
+}
+.sc_gg {
+  background: #4d68f5;
+}
+.posi_fixed {
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  top: 0;
+}

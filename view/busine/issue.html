@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>商家-发布商品</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/busine/css/issue.css">
+	</head>
+	<body>
+		<header>
+			<span class="tit">商品列表</span>
+		</header>
+		<form class="search" >
+			<input type="text" class="searInp" placeholder="输入您要搜索的商品"/>
+			<span class="btn" onclick='getList(0)'>搜索</span>
+		</form>
+		<div class="titBox">
+			<span class="t_span">商品名称</span>
+			<span class="t_span">操作</span>
+		</div>
+		<ul class="goods">
+		</ul>
+		<div class="tis"></div>
+		<div class="shadow" style="display: none;"></div>
+		<div class="shad" style="display: none;">
+			<span class="tit t_color">发布商品</span>
+			<input type="hidden" class="shopid">
+			<div class="shad_d">
+				<input type="hidden" class="method" data="">
+				<span class="shad_tit">交易方式 : </span>
+				<span class="radio check_rad" onclick="radCheck(this);" data="1">金点</span>
+				<span class="radio" onclick="radCheck(this);" data="2">现金</span>
+			</div>
+			<div class="shad_d">
+				<span class="shad_tit">价格 : </span>
+				<input type="number" class="price moneys"/>
+				<span class="danw p_dan">金点</span>
+			</div>
+			<div class="shad_d_t">
+				<input type="hidden" class="tj_d_price" value="">
+				<input type="hidden" class="tj_q_price" value="">
+				<span>推荐价格 : </span>
+				<span class="interval_inp"></span>
+				<span class="danw m_dan">金点</span>
+			</div>
+			<div class="shad_d">
+				<span class="shad_tit">数量 : </span>
+				<input type="number" class="num" value=""/>
+			</div>
+			<div class="shad_d">
+				<span class="sh_btn cancel" onclick="hideShad();">取消</span>
+				<span class="sh_btn sure" onclick="hideShad();release()">确定</span>
+			</div>
+			<!--分页input-->
+			<input type="hidden" value="0" class="pages" />
+		</div>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/busine/js/buscom.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/busine/ajax/request_issue.js"></script>
+	<script>
+		getList(0);
+	</script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>支付订单</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/s/css/paysucc.css">
+		<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	</head>
+
+	<body>
+		<header class="header">
+			<a href="javascript:history.go(-1);" class="backa"></a>
+			<span class="headtit hedta">支付订单</span>
+		</header>
+		<!--金点支付-->
+		<div class="jd">
+			<p class="jd_p"><span class="jd_price">{$money}</span>金点</p>
+			<p class="jd_mess">金点商城<span class="shopName"></span></p>
+		</div>
+		<!--支付密码-->
+		<input type="text" class="passwd" placeholder="请输入支付密码"/>
+		<div class="wjpwd">
+			<a href="" class="forget">忘记密码？</a>
+		</div>
+		<!--提交-->
+		<span class="sureBtn" onclick="checkPayPwd();">提交</span>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/s/ajax/request_detail.js"></script>
+</html>

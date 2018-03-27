@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>推广链接获取</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/promotion/css/pro.css">
+	</head>
+	<body>
+		<header>
+			<a href="javascript:history.go(-1);" class="back_h"></a>推广链接获取
+		</header>
+		<div class="task_l">
+			<p class="p_task">推广链接 : <a href="javascript:;" class="pt_a" id="article">{$url}</a></p>
+			<p class="p_task pt_color">提示 : 适用于贴吧推广</p>
+			<p class="ta_p"><span class="copy_lj" id="copy">点击复制链接</span></p>
+			<span class="show_ts">复制成功!</span>
+		</div>
+		<div class="ewmBox">
+			<p class="shad_top"><span class="shad_sp">邀请好友</span></p>
+			<div class="ewm_box"><img id='imgOne' class='ewm' style="width:150px;height:150px;"><span class="ewmm"></span></div>
+			<p class="ewm_p">提示 : 适用于贴吧推广</p>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	<script type="text/javascript" src="../../static/public/js/jquery.qrcode.js" ></script>
+    <script type="text/javascript" src="../../static/public/js/utf.js" ></script>
+	<script> 
+     $('.ewmm').qrcode({
+     	 render    : "canvas",
+         text    : "{$url}",
+         width : "472",//二维码的宽度472
+          height : "472",//二维码的高度
+          background : "#ffffff",//二维码的后景色
+          foreground : "#000000",//二维码的前景色
+          src: '../../static/promotion/qrcode/favicon.png'//二维码中间的图片
+     }).hide();    //
+	//复制链接   
+    function copyArticle(event){
+        const range = document.createRange();
+        range.selectNode(document.getElementById('article'));
+        const selection = window.getSelection();
+        if(selection.rangeCount > 0) selection.removeAllRanges();
+        selection.addRange(range);
+        document.execCommand('copy');
+        $(".show_ts").show().delay(2000).fadeOut();
+    }
+    document.getElementById('copy').addEventListener('click', copyArticle, false);
+    
+     var canvas=$('.ewmm').find('canvas').get(0);
+    $('#imgOne').attr('src',canvas.toDataURL('image/jpg'));
+	</script>
+</html>

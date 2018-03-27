@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>回收车</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/shopCart.css">
+		<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	</head>
+
+	<body>
+		<header>
+			<a href="javascript:history.go(-1);" class="back"></a>
+			<span class="tit">回收车</span>
+			{if $result neq ""}
+			<span class="changbj" onclick="showfoot(this,1);">编辑</span>
+			{/if}
+		</header>
+		{if $result neq ""}
+		<div class="list_box">
+			<!--展示商品-->
+				{foreach $result as $key=>$val}
+					<div class="list">
+						<div class="jfp_shop">
+						{if $val.source eq "YD"}
+						 	移动
+						 {else if $val.source eq "ZS"}
+						 	招商银行
+						 {else if $val.source eq "JT"}
+						 	交通银行
+						{/if}
+						商城兑换价：<span></span>{$val.sourceInfo->credit}积分<span>&nbsp;&nbsp;市场价</span>{$val.sourceInfo->price/100}元</div>
+						<div class="left">
+							<span class="rad" onclick="changeradio(this);"></span>
+							<input type="hidden" class="packageid" value="{$val.packageid}">
+						</div>
+						<a href="javascript:;" class="righta">
+							<img src="{$val.img}" class="rig_img" />
+							<div class="right">
+								<span class="shopname">{$val.goodsName}</span>
+								<span class="recyspan">
+									<b class="fontrecy">回收价： </b>
+									{if $val.method eq 2}
+									 	<b class="recy">{$val.price/100}</b>
+										<b class="payrecy">元</b>
+									{else if $val.method eq 1}
+										<b class="recy">{$val.integral/100}</b>
+										<b class="payrecy">金点</b>
+									{/if}
+								</span>
+								<div class="shunum">
+									<span class="jian btnj" onclick="numFun(this,0);"></span>
+									<input type="text" name="" class="shownum" readonly="readonly" value="{$val.num}" data="{$val.num}">
+									<span class="jia btnj" onclick="numFun(this,1);"></span>
+								</div>
+							</div>
+						</a>
+						{if $val.method eq 1}
+							<input type="hidden" class="hidprice" value="{$val.price/100}" data="{$val.method}">
+						{else if $val.method eq 2}
+							<input type="hidden" class="hidprice" value="{$val.integral/100}" data="{$val.method}">
+						{/if}
+					</div>
+				{/foreach}
+		</div>
+		<form action="confirmOrder" id="cartOrder" method="post">
+			<input type="hidden" name="state" class="states">
+		</form>
+		<!--默认底部-->
+		<footer>
+			<div class="change fir_qx" onclick="allcheck(this);">
+				<span class="changrad"></span>
+				<b class="changfont">全选</b>
+			</div>
+			<!--合计-->
+			<div class="all" style="display: none">
+				<span class="all_tit">合计：</span>
+				<span class="hidShop"></span>
+			</div>
+			<span class="account" onclick="sCartFun(1);">去结算</span>
+		</footer>
+		<!-- <span class="account">删除</span> -->
+		<!--确认删除弹框-->
+		<div class="shadow" style="display: none" onclick="remFun(0);"></div>
+		<div class="last" style="display: none">
+			<div class="last_top">
+				<p class="last_mess">您确定要删除这<span>1</span>种商品吗？</p>
+				<span class="sure sbtn" onclick="remFun(1)">确定</span>
+			</div>
+			<span class="cancel sbtn" onclick="remFun(0);">取消</span>
+		</div>
+		{else}
+			<div class="no_shop">
+				<p class="ns_tit">回收车是空的~</p>
+				<a href="../../h/init/lists" class="no_s_btn hs_gg">去逛逛</a>
+			</div>
+		{/if}
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/r/js/shopCart.js"></script>
+	<script type="text/javascript" src="../../static/r/ajax/request_shopCart.js"></script>
+</html>

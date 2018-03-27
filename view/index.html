@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>回收-商品列表</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/s/css/index.css">
+		<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	</head>
+	<body>
+		<header>
+			<a href="javascript:history.go(-1);" class="back"></a>
+			<a class="sous" href="findsearch"/>{if $result.name neq ""}{$result.name}{else}二手手机 OPPO{/if}</a>
+			<a href="listCart" class="list"></a>
+			<input type="hidden" name="names" id="pagenumber" value="">
+		</header>
+		{if $sign neq 1} 
+		<div class="co_mes">
+			<span class="banner"></span>
+			<p class="explain">
+				温馨提示：我们只回收直接从积分商城换去的商品，如果快递非积分商城邮寄将会拒收（除手机、贵金属、奢侈品外）
+			</p>
+		</div>
+		{/if} 
+		<!--选项-->
+		<ul class="ul_tab">
+			<li class="li_tab" onclick="changeli(this);"><span>综合排序</span><b class="tobot"></b></li>
+			<li class="li_tab" onclick="changeli(this);getType()"><span>分类</span><b class="tobot"></b></li>
+			<li class="li_tab" onclick="changeli(this);"><span>商品来源</span><b class="tobot"></b></li>
+			<li class="li_tab" data="0" onclick="changeli(this,1);"><span>筛选</span></li>
+		</ul>
+		<div class="cont" {if $sign eq 1}style="margin-top:1.8rem"{/if}  >
+			<!--用户选择记录-->
+			<div class="uchange" style="display: none;">
+			</div>
+			<!--商品列表显示-->
+			<div class="list_box">
+				<div class="showla">
+					<!--商品-->
+					<!--直接显示结果集   第一页-->
+					{if $result.result neq '' }
+					<input type="hidden" class="resLen" value="{$result.Countpage}">
+						{foreach $result.result as $key=>$val}
+							<a href="goodsinfo?id={$val.goods_id}" class="slista">
+								<!-- 商品图片 -->
+								<div class="spimg">
+									<img src="{$val.goods_img}"  class="shop_img" >
+									<span class="shop_by">包邮</span>
+								</div>
+								<!-- 商品详情 -->
+								<div class="shop_mesg">
+									<!-- 商品名字 -->
+									<span class="shopName">{$val.goods_name}</span>
+									<!-- 价格 -->
+									<span class="shopprice"><b class="jdColor">{$val.goods_integral/100}</b>金点 / <b class="pirceM">{$val.goods_price/100}</b>元</span>
+									<p class="shopdh">
+									 {if $val.goods_source eq "YD"}
+									 	中国移动
+									 {else if $val.goods_source eq "ZS"}
+									 	招商银行
+									 {else if $val.goods_source eq "JT"}
+									 	交通银行
+									{/if}
+									商城兑换价：<b class="sjf">{$val.goods_source_info->credit}</b>积分 + <b class="jspric">{$val.goods_source_info->price/100}</b>元
+									</p>
+								</div>
+							</a>
+						{/foreach} 
+					{else}
+					<p class="nohave">没有查到相应的商品</p>
+					{/if}
+				</div>
+				<div class="noh_box" style="display: none;"><p class="nohave_p"></p></div>
+			</div>
+		</div>
+		<form id="search" method="post">
+			<!--储存搜索名字  -->
+			<input type="hidden" name="name" id="name" value="{$result.name}">
+			<!-- 排序   -->
+			<input type="hidden" name="price" id="price" value="">
+			<!--获取分类左边大类  -->
+			<input type="hidden" name="classbig" id="classbig">
+			<!--获取分类右边小类  -->
+			<input type="hidden" name="classsmall" id="classsmall" value="">
+			<!--获取筛选品牌 -->
+			<input type="hidden" name="brandid" id="brandid">
+			<!--获取筛选名字 -->
+			<!-- <input type="hidden" name="goodsname" id="goodsname"> -->
+			<!--分页 -->
+			<input type="hidden" name="page" id="page" value="0">
+			<!--用来判断后面数据是否从新加载-->
+			<input type="hidden" name="addMess" id="addMess" value="0">
+			<!-- 判断 是否 选择来源  用来展示记录用户选择信息 -->
+			<input type="hidden" name="ly_Inp" id="ly_Inp" data="">
+			<!-- 判断 是否 选择筛选  用来展示记录用户选择信息 -->
+			<input type="hidden" name="sx_Inp" id="sx_Inp" data="">
+		</form>
+		<!--切换菜单-->
+		<div class="lichange" style="display: none;">
+			<!--排序-->
+			<div class="cshow onecs" onclick="hidecs();">
+				<span class="cshowSpan scsp_hover" data="center" onclick="changpx(this);lysavechange(0);stylescrotop();">综合排序</span>
+				<span class="cshowSpan top" data="top" onclick="changpx(this);lysavechange(0);stylescrotop();">价格由低到高</span>
+				<span class="cshowSpan bottom" data="bottom" onclick="changpx(this);lysavechange(0);stylescrotop();">价格由高到低</span>
+			</div>
+			<!--分类-->
+			<div class="cshow twocs">
+				<!--左边品类-->
+				<div class="clas_left">
+				<input type="hidden" id="classe">
+					<!-- <a href="javascript:;" class="lchild hover_pleft" onclick="changpl(this);">推荐品类</a> -->
+				</div>
+				<!--右边商品展示-->
+				<div class="clas_right">
+					<!-- 存放分类大类 -->
+				</div>
+			</div>
+			<!-- 来源  -->
+			<div class="cshow threecs">
+			<input type="hidden" id="source">
+				<div class="lyb">
+					<!--推荐-->
+					<div class="ly_box lypadt tuibg">
+						<div class="ly_div">
+							<b class="logo_img lyImgg" onclick="addchang(this);lysavechange(0);"></b>
+							<b class="messb" data="JT" onclick="addchang(this);lysavechange(0);">交通银行</b>
+							<span class="lySpan"></span>
+						</div>
+						<div class="ly_div">
+							<b class="logo_img lyImgb" onclick="addchang(this);lysavechange(0);"></b>
+							<b class="messb" data="ZS" onclick="addchang(this);lysavechange(0);">招商银行</b>
+							<span class="lySpan"></span>
+						</div>
+						<div class="ly_div">
+							<b class="logo_img lyImgc" onclick="addchang(this);lysavechange(0);"></b>
+							<b class="messb" data="YD" onclick="addchang(this);lysavechange(0);">中国移动</b>
+							<span class="lySpan"></span>
+						</div>
+					</div>
+					<!-- <h1 class="li_tit">金融类</h1>
+					<div class="ly_box">
+						<div class="ly_div">
+							<b class="logo_img lyImge" onclick="addchang(this);"></b>
+							<b class="messb" onclick="addchang(this);">招商银行</b>
+							<span class="lySpan"></span>
+						</div>
+					</div> -->
+				</div>
+				<div class="posfoot">
+					<span class="surebtn" onclick="hidecs();stylescrotop();">确定</span>
+				</div>
+			</div>
+			<!--筛选-->
+			<div class="cshow fourcs">
+				<div class="sxbox">
+					<!--品牌-->
+					<div class="ppjg">
+						<h1 class="pp_h1">品牌</h1>
+						<ul class="pp_ul">
+							
+						</ul>
+					</div>
+					<!--价格-->
+					<div class="ppjg">
+						<h1 class="pp_h1">价格</h1>
+						<ul class="jg_ul">
+							<li class="jg_li" onclick="addC(this,2);lysavechange(0);">100金点以下</li>
+							<li class="jg_li" onclick="addC(this,2);lysavechange(0);">100-1000金点</li>
+							<li class="jg_li" onclick="addC(this,2);lysavechange(0);">1000-10000金点</li>
+							<li class="jg_li" onclick="addC(this,2);lysavechange(0);">10000金点以上</li>
+						</ul>
+					</div>
+				</div>
+				<!--确定按钮-->
+				<div class="csf_bot">
+					<span class="scf_btn" onclick="hidecs();stylescrotop();">确定</span>
+				</div>
+			</div>
+		</div>
+		<!--定位中间跳转-->
+		<a href="../../s/init/lists" class="pos_href">我要买</a>
+		<!--底部导航-->
+		<footer>
+			<a href="../../i/init/ipage" class="footera">首页</a>
+			<a href="../../s/init/lists" class="footera">商城</a>
+			<a href="javascript:;"  class="hfootc footera">回收</a>
+			<a href="http://106.38.36.98:9080/sso/myCenter.html" class="footera">我的</a>
+		</footer>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	<script type="text/javascript" src="../../static/s/js/index.js"></script>
+	<script type="text/javascript" src="../../static/r/ajax/request_index.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			loadfun();
+			if($('.resLen').val() > 1){
+				$('.nohave_p').html('努力加载中~');
+			}
+			//用户选择记录
+			showjl();
+		});
+	</script>
+</html>

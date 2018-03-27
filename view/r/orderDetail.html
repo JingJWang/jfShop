@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>订单详情</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/orderDetail.css">
+		<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	</head>
+
+	<body>
+		<header>
+			<a href="javascript:history.go(-1);" class="back"></a>
+			<span class="headtit">订单详情</span>
+			<span class="kefu" onclick="shadowshow(1);">联系客服</span>
+		</header>
+		<div class="l_status">
+			<!--订单状态-->
+			<!--
+				等待商家预支付
+				商家已预支付请发货
+				已发货  等待商家验收
+				已成交
+				已取消
+			-->
+			<p class="ls_sta">
+			{if $resuOrder.order_state eq 1}
+			等待商家预支付
+			{else if $resuOrder.order_state eq 2}
+			商家已预支付请发货
+			{else if $resuOrder.order_state eq 3}
+			已发货  等待商家验收
+			{else if $resuOrder.order_state eq 4}
+			已取消
+			{else if $resuOrder.order_state eq 10}
+			已成交
+			{/if}
+			</p>
+			<p class="ls_time">{$resuOrder.jointime|date_format:'%Y-%m-%d %H:%M:%S'}</p>
+			<p class="ls_time">订单编号：<span class="list_num">{$resuOrder.order_number}</span></p>
+			<input type="hidden" class="orderNum" value="{$resuOrder.order_number}">
+		</div>
+			<!--结算商品-->
+			<div class="good_box">
+				<!--商品-->
+				{if $results neq ''}
+				{foreach $results as $key=>$result}
+				<div class="goods">
+					<div class="goodmess">
+						<img src="{$result.goods_img}" style="width:2rem;height:2rem" class="goodimg">
+						<span class="shopname">{$result.goods_name}</span>
+						<p class="shoPrice">
+							回收价：
+							{if $result.order_type eq 1}
+								{if $result.order_method eq 2}
+									<span class="sPrice">{$result.order_price/100}</span>
+									<span class="spay">元</span>	
+								{else if $result.order_method eq 1}
+									<span class="sPrice">{$result.order_integral/100}</span>
+									<span class="spay">金点</span>	
+								{/if}
+									<span class="spay">*</span>	
+									<span class="spay">{$result.num}</span>	
+							{else  $result.order_type eq 2}
+								{if $result.order_method eq 2}
+									<span class="sPrice">{$result.order_price/100}</span>
+									<span class="spay">元</span>	
+								{else if $result.order_method eq 1}
+									<span class="sPrice">{$result.order_integral/100}</span>
+									<span class="spay">金点</span>	
+								{/if}
+								<span class="spay">*</span>	
+								<span class="spay">{$result.num}</span>
+							{/if}				
+						</p>
+						<!--商家已预支付请发货  已发货,等待商家验收 -->
+						<div class="zij">
+						{if $result.order_state eq 2}
+							<p class="yzf">商家已预支付：
+								{if $result.order_method eq 2}
+									<span class="yzf_money yzf_sp">{$result.order_price/100*$result.num}</span>
+									<span class="yzf_pay yzf_sp">元</span>
+								{else if  $result.order_method eq 1}
+									<span class="yzf_money yzf_sp">{$result.order_integral/100*$result.num}</span>
+									<span class="yzf_pay yzf_sp">金点</span>								
+								{/if}
+								<span class="yzf_stat">（冻结）</span>
+							</p>
+							<p class="zij_tit">验货后解冻</p>
+						{else if $result.order_state eq 10}
+							<p class="yzf marbto">共计获得：
+								{if $result.order_method eq 2}
+									<span class="yzf_money yzf_sp">{$result.order_price/100}</span>
+									<span class="yzf_pay yzf_sp">元</span>
+								{else if  $result.order_method eq 1}
+									<span class="yzf_money yzf_sp">{$result.order_integral/100}</span>
+									<span class="yzf_pay yzf_sp">金点</span>								
+								{/if}
+							</p>
+						{/if}
+						</div>
+					</div>
+					<p class="good_js">商品来源：<span class="goods_span">
+					{if $result.order_source eq "ZS"}
+						招商
+						{else if $result.order_source eq "JT"}
+						交通
+						{else if $result.order_source eq "YD"}
+						移动
+						{/if}
+					银行积分商城</span></p>
+					<p class="good_js">兑换积分：<span class="goods_span">{$result.order_sourceinfo->credit|default:0}积分</span></p>
+					<p class="good_js">兑换价：<span class="goods_span">{$result.order_sourceinfo->price|default:0}元</span></p>
+					<div class="zh_box">
+						<a href="{$result.chain}" class="go_zhaos">点击前往招商银行查看</a>
+					</div>
+				</div>
+				{/foreach}
+				{/if}
+			</div>
+		<div class="loadmore" onclick="showmore(this);" style="display: none;">点击加载更多 >></div>
+		<!--联系方式-->
+		<div class="orderC">
+			<h1 class="rel_h1_lx">联系方式</h1>
+			<div class="inp_box">
+				<span>联系人：</span>
+				<input type="" name="" value="{$resuOrder.order_name}" class="nameInp inp" readonly="readonly">
+			</div>
+			<div class="inp_box">
+				<span>联系电话：</span>
+				<input type="" name="" value="{$resuOrder.order_phone}" class="nameInp inp" readonly="readonly">
+			</div>
+		</div>
+		<!--商家已预支付请发货-->
+		<!--输入物流信息-->
+		{if $resuOrder.order_state eq 2}
+		<div class="orderB">
+			<h1 class="rel_h1">物流信息</h1>
+			<p class="ts_mess">请填写招商银行发货物流信息</p>
+			<div class="inp_box_wl">
+				<span>快递公司：</span>
+				<input type="text"  value="" class="kdnameInp inp" placeholder="请输入快递公司" onblur="bl_inp(this,1);">
+			</div>
+			<div class="inp_box_wl">
+				<span>快递单号：</span>
+				<input type="text" value="" class="kdNumInp inp" placeholder="请输入快递单号" onblur="bl_inp(this,2);">
+			</div>
+		</div>
+		{else if $resuOrder.order_state eq 3}
+		<!--已发货  等待商家验收-->
+		<!--快递信息-->
+		<div class="orderC">
+			<h1 class="rel_h1_lx">快递信息</h1>
+			<span class="inquire" onclick="shadowshow(3);expressRecord();">查询物流</span>
+			<div class="inp_box">
+				<span>快递公司：</span>
+				<input type="text" name="" value="{$resuOrder.kdname}" class="kdnameInp inp" readonly="readonly">
+			</div>
+			<div class="inp_box">
+				<span>快递单号：</span>
+				<input type="text" name="" value="{$resuOrder.kdnumber}" class="kdNumInp inp" readonly="readonly">
+			</div>
+		</div>
+		{/if}
+		<!--邮寄地址-->
+		<div class="orderB last_mar_bto">
+			<h1 class="rel_h1">收货地址</h1>
+			<p class="ts_mess">请从招商银行直接邮寄</p>
+			<div class="address">
+				<div class="addr">
+					<span class="addr_tit">收&nbsp;件&nbsp;人：</span>
+					<span class="addr_zhi">金点</span>
+				</div>
+				<div class="addr">
+					<span class="addr_tit">联系方式：</span>
+					<span class="addr_zhi">15200003333</span>
+				</div>
+				<div class="addr">
+					<span class="addr_tit">收货地址：</span>
+					<span class="addr_zhi">北京市海淀区上地五街14号</span>
+				</div>
+				<div class="addr">
+					<span class="addr_tit">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编：</span>
+					<span class="addr_zhi">100000</span>
+				</div>
+			</div>
+			{if $resuOrder.order_state eq 2}
+			<!-- <span class="affirm" onclick="yesTran()">确认</span> -->
+			<div class="last_btn_box">
+				<span class="p_fh btn_list" onclick="yesTran()">确认</span>
+				<span class="p_qx btn_list" onclick="shadowshow(2);">取消订单</span>
+			</div>
+			{/if}
+		</div>
+		<!-- 遮罩层 -->
+		<div class="shadow" style="display:none;" onclick="hideshad(4);"></div>
+		<!--联系客服-->
+		<div class="shad kefu_box" style="display:none;">
+			<div class="heads">
+				<p class="h_tit">联系客服</p>
+				<span class="close" onclick="hideshad(1);"></span>
+			</div>
+			<p class="shad_p">
+				拨打客服电话
+				<span class="shad_span">400-641-5080</span>
+			</p>
+			<!-- <a href="javascript:;" class="cancel btn" onclick="hideshad();">取消</a>
+			<a href="javascript:;" class="sure btn" onclick="hideshad();">确定</a> -->
+		</div>
+		<!--取消订单-->
+		<div class="shad can_list" style="display:none;">
+			<p class="shad_p c_martop">
+				您确定要取消该订单吗？
+			</p>
+			<a href="javascript:;" class="cancel btn" onclick="hideshad(2);">取消</a>
+			<a href="javascript:;" class="sure btn" onclick="cancleOrder();hideshad(2);">确定</a>
+		</div>
+		<!--查看物流-->
+		<div class="shad wul_box" style="display:none;">
+			<div class="heads wl_mar_bto">
+				<p class="h_tit">查看物流</p>
+				<span class="close" onclick="hideshad(3);"></span>
+			</div>
+			<ul class="wl_ul">
+				<li class="wl_li">
+					<p class="time_l">
+						<span class="tl_day">12.12</span>
+						<span class="tl_time">12:22</span>
+					</p>
+					<p class="center_line"><span></span></p>
+					<p class="mess_r">已发往北京集散</p>
+				</li>
+				<li class="wl_li">
+					<p class="time_l">
+						<span class="tl_day">12.12</span>
+						<span class="tl_time">12:22</span>
+					</p>
+					<p class="center_line"><span></span></p>
+					<p class="mess_r">已发往北京集散</p>
+				</li>
+				<li class="wl_li">
+					<p class="time_l">
+						<span class="tl_day">12.12</span>
+						<span class="tl_time">12:22</span>
+					</p>
+					<p class="center_line"><span></span></p>
+					<p class="mess_r">已发往北京集散</p>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/r/js/orderDetail.js"></script>
+	<script type="text/javascript" src="../../static/r/ajax/request_order.js"></script>
+</html>

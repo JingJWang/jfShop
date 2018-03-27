@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>商城-全部订单列表</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/list.css">
+	</head>
+	<body>
+		<header>
+			<a href="javascript:history.go(-1);" class="back"></a>
+			<span class="headtit">我的订单</span>
+		</header>
+		<ul class="ul_s">
+		 {foreach $stateinfo as $key=>$val}
+				{if $state eq $key}
+					<a href="orderLists?state={$key}&page=0" ><li class="li_stat li_hover">{$val}</li></a>
+				{else}
+					<a href="orderLists?state={$key}&page=0" ><li class="li_stat">{$val}</li></a>
+				{/if}
+		{/foreach}
+		</ul> 
+		<div class="list">
+			<!--商品-->
+			{if $result neq ""}
+			{foreach $result as $key=>$val}
+			<div class="gods">
+				{foreach $val.list as $k=>$v}
+				<a href="orderinfo?orderId={$val.order_number}" class="gdmess">
+					<img src="{$v.shop_img}" class="goodimg">
+					<span class="shopname">{$v.shop_name}</span>
+					<input type="hidden" value="" class="sums" />
+					<p class="shoPrice">
+					{if $val.order_method eq 2}
+						<span class="sPrice">{$v.shop_price}</span>
+						<span class="spay">元</span>
+					{else}
+						<span class="sPrice">{$v.shop_integral/100}</span>
+						<span class="spay">金点</span>
+					</p>
+					{/if}
+					<p class="shoPrice">
+						数量：<span class="god_num">{$v.num}</span>			
+					</p>
+				</a>
+				{/foreach}
+				<div class="list_sta">
+					 {$val.state}
+				</div>
+				<div class="bot_god">
+					<p class="god">共<span class="godnum">{$val.total}</span>件商品</p>
+					<p class="god_hj">合计：<span class="god_jd"></span>{if $val.order_method eq 2}{$val.order_price/100}元{else}{$val.order_integral/100}金点{/if}</p>
+					<span class="godLSta">
+					{if $val.stateinfo=='去支付'}
+					<a href="intoJdpay?orderId={$val.order_number}">
+				 	{else if $val.stateinfo=='查看订单'}
+				 	<a href="orderinfo?orderId={$val.order_number}">
+				 	{/if}	
+					{$val.stateinfo}</a></span>
+				</div>
+			</div>
+			{/foreach}
+		{else}
+		<div class="nohave_list">您目前没有相关订单</div>
+		{/if}	
+		</div>
+		<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	</body>
+</html>

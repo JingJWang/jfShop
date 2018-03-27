@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>商品详情</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/details.css">
+		<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	</head>
+
+	<body>
+		<header>
+			<a href="javascript:history.go(-1);" class="back"></a>
+			<a class="sous" href="findsearch" />二手手机 OPPO</a>
+			<a href="listCart" class="list"></a>
+			<form action="confirmOrder" id="shopHui" {if $userid eq ""}method="get"{else} method="post"{/if}>
+				<input type="hidden" name="state" class="states">
+			</form>
+			<input type="hidden" class="userid" value="{$userid}">
+			<input type="hidden" class="sign" value="1">
+			<input type="hidden" class="inpNum" value="1">
+		</header>
+		<div class="deta_img">
+			<!--放入商品图片-->
+			<img src="{$result.img}" class="shopImg">
+			<input type="hidden" value="{$result.goodsid}" class="id">
+		</div>
+		<div class="goods">
+			<p class="goods_name">{$result.goodsname}</p>
+			<div class="hs_font">
+				<span class="font_sp">回收价:</span>
+				<span class="f_jd">{$result.integral/100}</span>
+				<span class="font_s">金点/</span>
+				<span class="f_money">{$result.price/100}</span>
+				<span class="font_s">元</span>
+			</div>
+			<div class="jfp_shop">
+			{if $result.source eq "ZS"}
+			招商银行
+			{else if $result.source eq "YD"}
+			中国移动
+			{else if $result.source eq "JT"}
+			交通银行
+			{/if}
+			商城兑换价：<span>{$credit}</span>积分/市场价:<span>{$yuanPrice/100}</span>元</div>
+			<div class="zh_box">
+				<a href="{$result.chain}" class="go_zhaos">点击前往
+				{if $result.source eq "ZS"}
+				招商银行
+				{else if $result.source eq "YD"}
+				中国移动
+				{else if $result.source eq "JT"}
+				交通银行
+				{/if}	
+				查看</a>
+			</div>
+			<div class="shunum">
+				<span class="shuname">数量</span>
+				<span class="jian btnj" onclick="numFun(this,0);"></span>
+				<input type="number" name="" class="shownum" readonly="readonly" value="1" />
+				<span class="jia btnj" onclick="numFun(this,1);"></span>
+			</div>
+		</div>
+		<div class="xq">
+			<h1 class="xqtit">商品详情</h1>
+			<div class="xq_child">{$result.content}
+			{if $img|@count >0}
+				{foreach $img as $key=>$val}
+					<img src="{$val}">
+				{/foreach}
+			{/if}
+			</div>
+		</div>
+		<footer>
+			<span class="gogwc foot_a" onclick="showtk(this);" data="1">加入回收车</span>
+			<span class="nowhs foot_a" onclick="showtk(this);" data="2">立刻回收</span>
+		</footer>
+		<!--定位中间跳转-->
+		<a href="../../s/init/lists" class="pos_href">我要买</a>
+		<!--遮罩层-->
+		<div class="shadow" style="display: none"></div>
+		<div class="jy" style="display: none">
+			<div class="jy_tit">
+				<span class="jy_t">选择交易方式</span>
+				<span class="close" onclick="closefun();"></span>
+			</div>
+			<p class="jy_ts">提示：您的商品请从招商银行直接邮寄给我们</p>
+			<ul class="pay_ul">
+				<li class="pay_li"></li>
+				<li class="pay_li"></li>
+			</ul>
+			<!---->
+			<ul class="pay_rad">
+				<li class="li_radio">
+					<span class="rad rad_check" onclick="radcheck(this,1);"></span>
+					<span class="jine" onclick="radcheck(this,1);">金点</span>
+				</li>
+				<li class="li_radio">
+					<span class="rad" onclick="radcheck(this,2);"></span>
+					<span class="jine" onclick="radcheck(this,2);">现金</span>
+				</li>
+			</ul>
+			<!--data: 1购物车   2立刻购买-->
+			<span class="surebtn" onclick="gonext(this);" data="">确定</span>
+			<!--data-pay  1金点    2现金-->
+			<input class="hidinp" type="hidden" data-pay="1" data-zsh="" />
+		</div>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/r/js/details.js"></script>
+	<script type="text/javascript" src="../../static/r/ajax/request_details.js"></script>
+	<script>
+		function huicart(){
+			window.location.href='listCart';
+		}
+	</script>
+</html>

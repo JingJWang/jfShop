@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>我的商品列表</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/busine/css/issue.css">
+	</head>
+	<body>
+		<header>
+			<span class="tit">我的商品</span>
+		</header>
+		<form class="search" >
+			<input type="text" class="searInp" placeholder="输入您要搜索的商品"/>
+			<span class="btn" onclick='getLists()'>搜索</span>
+		</form>
+		<div class="title">
+			<span class="titMess">商品名称</span>
+			<span class="titMess">价格 / 数量</span>
+			<span class="titMess">商品状态</span>
+		</div>
+		<ul class="list">
+		</ul>
+		<div class="shadow" style="display: none;"></div>
+		<div class="shad" style="display: none;">
+			<span class="tit t_color">商品编辑</span>
+			<input type="hidden" class="shopid">
+			<div class="shad_d">
+				<input type="hidden" data="">
+				<span class="shad_tit">交易方式 : </span>
+				<span class="radio check_rad" onclick="radCheck(this);" data="2">金点</span>
+				<span class="radio" onclick="radCheck(this);" data="1">现金</span>
+			</div>
+			<div class="shad_d">
+				<span class="shad_tit">价格 : </span>
+				<input type="number" class="price" value=""/>
+				<span class="danw">金点</span>
+			</div>
+			<div class="shad_d">
+				<span class="shad_tit">数量 : </span>
+				<input type="number" class="num" value=""/>
+			</div>
+			<div class="shad_d">
+				<span class="sh_btn cancel" onclick="hideShad();">取消</span>
+				<a class="sh_btn sure" onclick="hideShad();release()">确定</a>
+			</div>
+		</div>
+	<body>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	<script type="text/javascript" src="../../static/busine/js/buscom.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/busine/ajax/request_mygoods.js"></script>
+	<script>
+	getLists();
+	</script>
+</html>

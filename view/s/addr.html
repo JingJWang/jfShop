@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>收货地址管理</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/s/css/sdetail.css">
+		<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	</head>
+	<body>
+		<header>
+			<a href="javascript:history.go(-1);" class="back"></a>
+			<p class="headtit">管理收货地址</p>
+			{if $state neq ""}<input type="hidden" value="{$state}" class="state">{/if}
+		</header>
+		<!--无地址-->
+		<div class="noaddr"><a {if $state neq ""}href="intoAddressAdd?sign=add&state={$state}"{else} href="intoAddressAdd?sign=add"{/if}>添加收货地址</a></div>
+		{if $result neq ''}
+		<div class="titTop">
+			<h1 class="rel_h1">收货地址</h1>
+		</div>
+		<!--收货地址-->
+		<div class="addr_box">
+			<!--显示每条收货地址-->
+			{foreach $result as $key=>$val}
+			<div class="a_top">
+			  <a href="javascript:;" {if $state neq ''}onclick="delAddress({$val.address_id},'default')" {/if}>
+				<div class="ad_t">
+					<p class="ad_p">
+						<span class="cl_span">姓名</span>
+						<span class="ad_name">{$val.address_name}</span>
+					</p>
+					<p class="ad_pa">
+						<span class="cl_span">联系电话</span>
+						<span class="ad_moblie">{$val.address_phone}</span>
+					</p>
+				</div>
+				<div class="adr">
+					<span class="adr_t">地址详细</span>
+					<p class="adr_mess">{$val.address_province}{$val.address_city}{$val.address_area}{$val.address_details}</p>
+				</div>
+			  </a>
+				<div class="change">
+					<a href='intoAddressAdd?id={$val.address_id}&sign=edit&state={$state}' class="chaSpan editAddr">编辑</a>
+					<a href="javascript:;" class="chaSpan delAddr"  onclick="delAddress({$val.address_id},'del')">删除</a>
+				</div>
+			</div>
+			{/foreach}
+		</div>
+		{/if}
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/s/ajax/request_address.js"></script>
+</html>

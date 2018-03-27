@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>首页</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/s/css/index.css">
+		<link rel="stylesheet" type="text/css" href="../../static/public/css/swiper.3.1.2.min.css">
+		<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	</head>
+	<body>
+		<header>
+			<a href="javascript:history.go(-1);" class="back"></a>
+			<a class="sous" href="../../s/init/Shopsear"/>oppo 二手手机</a>
+			<a href="../../s/init/shopcart" class="list"></a>
+			<input type="hidden" name="names" id="pagenumber" value="">
+		</header>
+		<!--轮播图-->
+		<div class="swiper-container"><!--swiper容器[可以随意更改该容器的样式-->  
+		    <div class="swiper-wrapper">  
+		        <div class="swiper-slide"><img src="../../static/i/img/banner1.jpg"></div>  
+		        <div class="swiper-slide"><img src="../../static/i/img/banner1.jpg"></div>  
+		        <div class="swiper-slide"><img src="../../static/i/img/banner1.jpg"></div>  
+		    </div>  
+		    <div class="swiper-pagination"></div><!--分页器-->
+		</div> 
+        <!--点击菜单-->
+        <div class="menu">
+        	<form action='../../s/init/lists' class="formpri" method="post">
+				<div class="m_top m_top_pos">
+				<input type="hidden" name="pri">
+					<a href="javascript:;" onclick="formtijiao(this)" data="100" class="m_top_a col_one">100金点以下</a>
+					<a href="javascript:;" onclick="formtijiao(this)" data="100-1000" class="m_top_a col_one">100-1000金点</a>
+					<a href="javascript:;" onclick="formtijiao(this)" data="1000-10000" class="m_top_a col_one">1000-10000金点</a>
+					<a href="javascript:;" onclick="formtijiao(this)" data="10000" class="m_top_a col_one">10000金点以上</a>
+				</div>
+				<div class="m_top">
+				<input type="hidden" name="classbig" id="classbig">
+				{foreach $typename as $key=>$name}
+					{if $key<5}
+					<a href="javascript:;" onclick="formtijiao(this)" class="m_top_a col_two" data="{$name.typeid}">{$name.typename}</a>
+					{/if}
+				{/foreach}
+				<!--<a href="javascript:;" onclick="formtijiao(this)" class="m_top_a col_two" data='0'>全部分类</a>-->
+				</div>
+			<div class="m_top m_top_flex">
+			<input type="hidden" name="source" id="source">
+				<a href="javascript:;" class="m_top_c" data="JT" onclick="formtijiao(this)">
+					<span class="m_top_a_img lyImgg"></span>
+					<span class="m_top_a_tit">交通银行</span>
+				</a>
+				<a href="javascript:;" class="m_top_c" data="ZS" onclick="formtijiao(this)">
+					<span class="m_top_a_img lyImgb"></span>
+					<span class="m_top_a_tit">招商银行</span>
+				</a>
+				<a href="javascript:;" class="m_top_c" data="YD" onclick="formtijiao(this)">
+					<span class="m_top_a_img lyImgc"></span>
+					<span class="m_top_a_tit">中国移动</span>
+				</a>
+			</div>
+			</form>
+			<div class="m_top">
+				<a href="../../s/init/lists" class="btn_m">金点买商品</a>	
+				<a href="../../h/init/lists" class="btn_m">卖商品得金点</a>	
+			</div>
+        </div>
+		<!--ul-->
+		<ul class="ul_tab">
+			<li class="li_tab"><span class="m_li hover_mli" data="good" onclick="check(this,'kind',0)">好货推荐</span></li>
+			<li class="li_tab"><span class="m_li" data="neww" onclick="check(this,'kind',0)">新品推荐</span></li>
+			<li class="li_tab"><span class="m_li" data="hot" onclick="check(this,'kind',0)">热销商品</span></li>
+		</ul>
+		<div class="c_cont" >
+			<div class="c_lis_box">
+				<div class="showla">
+				{if $result.result neq ''}
+					<input type="hidden" class="resLen" value="{$result.Countpage}">
+					{foreach $result.result as $key=>$val}
+						<a href="../../s/init/shopinfo?id={$val.shop_id}" class="slista er">
+							<div class="spimg">
+								<img class="shop_img" src="{$val.shop_img}">
+								<span class="shop_by">包邮</span>
+							</div>
+							<div class="shop_mesg">
+								<span class="shopName">{$val.shop_name}</span>
+								<span class="shopprice"><b class="jdColor">{$val.shop_integral/100}</b>金点 / <b class="pirceM">{$val.shop_price/100}</b>元</span>
+								<p class="shopdh">{if $val.shop_source eq "YD"}中国移动{else if $val.shop_source eq "ZS"}招商银行
+									 {else if $val.shop_source eq "JT"}交通银行{/if}兑换价：<b class="sjf">{$val.shop_source_info->credit}</b>积分
+								</p>
+								<p class="shopdh">
+								<span>市场价：<b class="jspric">{$val.shop_source_info->price/100}</b>元</span>
+								</p>
+							</div>
+						</a>
+						{/foreach}
+					{else}
+					<p class="nohave">没有查到相应的商品</p>
+					{/if}
+					<!-- <p class="nohave" style="display: none;">没有查到相应的商品</p> -->
+				</div>
+				<div class="noh_box" style="display: none;"><p class="nohave_p"></p></div>
+			</div>
+		</div>
+		<!--底部导航-->
+		<footer>
+			<a href="javascript:;" class="hfoota footera">首页</a>
+			<a href="../../s/init/lists"  class="footera">商城</a>
+			<a href="../../h/init/lists" class="footera">回收</a>
+			<a href="javascript:;" class="footera">我的</a>
+		</footer>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/swiper-3.4.2.jquery.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	<!--<script type="text/javascript" src="../../static/s/js/index.js"></script>-->
+	<script type="text/javascript" src="../../static/i/ajax/request_index.js"></script>
+	<script type="text/javascript">  
+	    var mySwiper = new Swiper(".swiper-container",{  
+	        direction:"horizontal", /*横向滑动*/  
+	        loop:true, /*形成环路（即：可以从最后一张图跳转到第一张图*/ 
+	        pagination:".swiper-pagination", /*分页器*/  
+	        autoplay: 2000, /*每隔3秒自动播放*/ 
+	        observer:true, //修改swiper自己或子元素时，自动初始化swiper
+	        observeParents:true //修改swiper的父元素时，自动初始化swiper
+	    }) 
+	    //给轮播图设置
+	    var winw = $(window).width();
+	    $('.swiper-container,.swiper-slide,.swiper-slide img').width(winw);
+	</script> 
+</html>

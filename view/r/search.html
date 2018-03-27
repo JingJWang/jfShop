@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>搜索</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/search.css">
+		<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	</head>
+
+	<body>
+		<header>
+			<a href="javascript:history.go(-1);" class="back"></a>
+			<form action="lists" id="searchName" method="post">
+				<input type="text" name="name" placeholder="二手手机 OPPO" class="sous" />
+				<button class="list" id="l_btn" onclick="checkSearch();">搜索</button>
+			</form>
+		</header>
+		<!--搜索历史-->
+		<div class="history sear martop">
+			<h1 class="tit_h1">最近搜索</h1>
+			{if $result.jintime neq ""}<span class="clear" onclick="hideSear();delSearch();">清除</span>{/if}
+			<ul class="sea_ul">
+				{if $result.jintime neq ""}
+					{foreach $result.jintime as $key=>$val}
+						<li class="sea_li" onclick="seachName(this);lysavechange(0)">{$val.hosName}</li>
+					{/foreach}
+				 {/if}
+			</ul>
+		</div>
+		<!--热门-->
+		<div class="hot sear">
+			<h1 class="tit_h1">热门搜索</h1>
+			<ul class="sea_ul">
+			 {if $result.hot neq ''}
+				{foreach $result.hot as $key=>$val}
+					<li class="sea_li"  onclick="seachName(this);lysavechange(0)">{$val.hosName}</li>
+				{/foreach}
+			 {/if}
+			</ul>
+		</div>
+		<!--定位中间跳转-->
+		<a href="javascript:;" class="pos_href">我要买</a>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/r/js/search.js"></script>
+	<script type="text/javascript" src="../../static/r/ajax/request_search.js"></script>
+</html>

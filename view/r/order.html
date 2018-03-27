@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>确认回收订单</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/order.css">
+		<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	</head>
+
+	<body>
+		<header>
+			<!-- <a href="javascript:history.go(-1);" class="back"></a> -->
+			<a href="javascript:;" onclick="backFun();" class="back"></a>
+			<span class="headtit">确认订单</span>
+		</header>
+		<p class="tishi">
+			提示： 您的商品请从招商银行直接邮寄给我们
+		</p>
+		<div class="good_box">
+			<!--商品-->
+			{if $state eq 1}
+			<div class="goods">
+				<div class="goodmess">
+					<img src="{$goods.img}" style="width:2rem;height:2rem" class="goodimg"/>
+					<span class="shopname">{$goods.goodsname}</span>
+					<input type="hidden" class="hid_id" value="{$goods.goodsid}">
+					<input type="hidden" class="hid_sign" value="{$getSess.sign|default:''}">
+					<input type="hidden" class="hid_inpNum" value="{$getSess.inpNum|default:''}">
+					<p class="shoPrice">
+						回收价：
+						{if $getSess.sign eq 2}
+						<span class="sPrice">{$goods.price/100}</span>
+						<span class="spay">元</span>		
+						
+						{else if $getSess.sign eq 1}
+						<span class="sPrice">{$goods.integral/100}</span>
+						<span class="spay">金点</span>	
+						{/if}	
+						<span class="shop_x">×</span>
+						<span class="shop_num">{$getSess.inpNum}</span>		
+					</p>
+				</div>
+				<p class="good_js">商品来源：<span class="goods_span">
+				{if $goods.source eq "YD"}
+				 	中国移动
+				 {else if $goods.source eq "ZS"}
+				 	招商银行
+				 {else if $goods.source eq "JT"}
+				 	交通银行
+				{/if}商城</span></p>
+				<p class="good_js">兑换积分：
+					<span class="goods_span">
+						{if $goods.sourceinfo->credit neq ""}
+						{$goods.sourceinfo->credit}积分
+						{/if}
+					</span>
+				</p>
+				<p class="good_js">市场价：
+					<span class="goods_span">
+						{if $goods.sourceinfo->price neq ""}
+						{$goods.sourceinfo->price/100}元
+						{/if}
+					</span>
+				</p>
+				<div class="zh_box">
+					<a href="{$goods.chain}" class="go_zhaos">点击前往
+						{if $goods.source eq "YD"}
+						 	中国移动
+						 {else if $goods.source eq "ZS"}
+						 	招商银行
+						 {else if $goods.source eq "JT"}
+						 	交通银行
+						{/if}查看
+					</a>
+				</div>
+			</div>
+			{else if $state eq 2}
+			{foreach $getSess as $key=>$val}
+				<div class="goods">
+				<div class="goodmess">
+					<img src="{$val.img}" style="width:2rem;height:2rem" class="goodimg"/>
+					<span class="shopname">{$val.goodsname}</span>
+					<input type="hidden" class="hid_id" value="{$val.goodsid}">
+					<input type="hidden" class="hid_packid" value="{$val.packageid}">
+					<input type="hidden" class="hid_sign" value="{$val.method}">
+					<input type="hidden" class="hid_inpNum" value="{$val.num}">
+					<p class="shoPrice">
+						回收价：
+						{if $val.method eq 2}
+						<span class="sPrice">{$val.price/100}</span>
+						<span class="spay">元</span>		
+						<span class="shop_x">×</span>
+						<span class="shop_num">{$val.num}</span>
+						{else if $val.method eq 1}
+						<span class="sPrice">{$val.integral/100}</span>
+						<span class="spay">金点</span>		
+						<span class="shop_x">×</span>
+						<span class="shop_num">{$val.num}</span>
+						{/if}			
+					</p>
+				</div>
+				<p class="good_js">商品来源：<span class="goods_span">
+				{if $val.source eq "YD"}
+				 	中国移动
+				 {else if $val.source eq "ZS"}
+				 	招商银行
+				 {else if $val.source eq "JT"}
+				 	交通银行
+				{/if}
+				积分商城</span></p>
+				
+				<p class="good_js">兑换积分：
+					<span class="goods_span">
+						{if $val.sourceinfo->credit neq ""}
+							{$val.sourceinfo->credit}积分
+						{/if}
+					</span>
+				</p>
+				<p class="good_js">市场价：
+					<span class="goods_span">
+						{if $val.sourceinfo->price neq ""}
+							{$val.sourceinfo->price/100}元
+						{/if}
+					</span>
+				</p>
+				<div class="zh_box">
+					<a href="{$val.chain}" class="go_zhaos">点击前往招商银行查看</a>
+				</div>
+			</div>
+			{/foreach}
+			{/if}
+		</div>
+		
+		<div class="loadmore" onclick="showmore(this);" style="display: none;">点击加载更多 >></div>
+		
+		<!--联系方式-->
+		<div class="orderB">
+			<h1 class="rel_h1">联系方式</h1>
+			<p class="ts_mess">请填写您的联系方式</p>
+			<div class="inp_box">
+				<span>联系人：</span>
+				<input type="text" value="" onblur="checkName(this)" class="nameInp inp" placeholder="请输入您的姓名" maxlength="4" />
+			</div>
+			<div class="inp_box">
+				<span>联系电话：</span>
+				<input type="text" value="" onblur="testMoblie(this)" class="phoneInp inp" placeholder="请输入您的联系方式" onblur="testMoblie(this)"/>
+			</div>
+		</div>
+		<!--收货地址-->
+		<div class="orderB">
+			<h1 class="rel_h1">收货地址</h1>
+			<p class="ts_mess">请从招商银行直接邮寄</p>
+			<div class="address">
+				<div class="addr">
+					<span class="addr_tit">收件人：</span>
+					<span class="addr_zhi">金点</span>
+				</div>
+				<div class="addr">
+					<span class="addr_tit">联系方式：</span>
+					<span class="addr_zhi">15200003333</span>
+				</div>
+				<div class="addr">
+					<span class="addr_tit">收货地址：</span>
+					<span class="addr_zhi">北京市海淀区上地五街14号</span>
+				</div>
+				<div class="addr">
+					<span class="addr_tit">邮编：</span>
+					<span class="addr_zhi">100000</span>
+				</div>
+			</div>
+		</div>
+		<!--回收流程-->
+		<div class="orderB pad_bottom_last">
+			<h1 class="rel_h1">回收流程</h1>
+			<div class="liuc">
+				<p class="lc_p">选择提交回收订单</p>
+				<p class="lc_p">去积分商城下单并邮寄至订单详情中的指定地址</p>
+				<p class="lc_p">货品确认无误后收到货款</p>
+			</div>
+		</div>
+		<!--底部-->
+		<footer>
+			<div class="f_l">共计获得：
+				{if $state eq 1}
+					{if $getSess.sign eq 2}
+						<span class="fl_money f_l_sp">{$goods.price/100*$getSess.inpNum}</span>
+						<span class="fl_pay f_l_sp">元</span>	
+					{else if $getSess.sign eq 1}
+						<span class="fl_money f_l_sp">{$goods.integral/100*$getSess.inpNum}</span>
+						<span class="fl_pay f_l_sp">金点</span>
+					{/if}
+				{else if $state eq 2}
+					<span class="fl_money f_l_sp duoshangpin"></span>
+				{/if}
+					
+			</div>
+			<span onclick="submitOrder({$state})" class="f_r">提交订单</span>
+		</footer>
+		<!--遮罩层-->
+		<div class="shadow" style="display: none" onclick="remFun(0);"></div>
+		<div class="last" style="display: none">
+			<div class="last_top">
+				<p class="last_mess">您确定离开该页面吗？</p>
+				<span class="sure sbtn" onclick="remFun(1)">确定</span>
+			</div>
+			<span class="cancel sbtn" onclick="remFun(0);">取消</span>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/r/ajax/request_order.js"></script>
+</html>

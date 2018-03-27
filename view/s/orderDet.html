@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>订单详情</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/s/css/orderDet.css">
+		<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	</head>
+
+	<body>
+		<header>
+			<a href="javascript:history.go(-1);" class="back"></a>
+			<span class="headtit">订单详情</span>
+		</header>
+		<div class="l_status">
+			<p class="ls_sta">
+				{$result.state}
+			</p>
+			<p class="ls_time">
+			{if $result.state eq 1}
+				{$result.jointime|date_format:'%Y-%m-%d %H:%M:%S'}
+				<input type="hidden" value="{$result.jointime}" class="time_s">
+			{else if $result.order_state neq 1}
+				{$result.updatetime|date_format:'%Y-%m-%d %H:%M:%S'} 
+				<input type="hidden" value="{$result.updatetime}" class="time_s">
+			{/if}
+			</p>
+			<p class="ls_time">订单编号：<span class="list_num">{$result.order_number}</span></p>
+			<!-- 倒计时 -->
+			{if $result.order_state eq 3}
+			<div class="djs">
+				<p>距离自动收货还有：</p>
+				<p id="hideD"><span id="RemainD"></span>天</p> 
+				<p id="hideH"><span id="RemainH"></span>小时</p>
+				<p id="hideM"> <span id="RemainM"></span>分钟</p> 
+				<p id="hideS"><span id="RemainS"></span>秒</p>
+			</div>
+			{/if}
+		</div>
+		{if $result.order_state eq 3}
+		<!--商家已发货等待收货-->
+		<div class="orderC">
+			<h1 class="rel_h1_lx">快递信息</h1>
+			<!-- <span class="inquire">查询物流</span> -->
+			<div class="inp_box">
+				<span>快递公司：</span>
+				<input type="text" name="" value="顺丰快运" class="kdnameInp inp" readonly="readonly">
+			</div>
+			<div class="inp_box">
+				<span>快递单号：</span>
+				<input type="text" name="" value="2513589744" class="kdNumInp inp" readonly="readonly">
+			</div>
+		</div>
+		{/if}
+		<!--显示地址-->
+		<div class="addr">
+			<div class="addr_tit">
+				<a class="ad_top" href="javascript:;">
+					<h1 class="rel_h1">收货地址</h1>
+				</a>
+				<div class="ad_t">
+					<p class="ad_p">
+						<span class="cl_span">姓名</span>
+						<span class="ad_name">{$result.address.name|default:""}</span>
+					</p>
+					<p class="ad_pa">
+						<span class="cl_span">联系电话</span>
+						<span class="ad_moblie">{$result.address.phone|default:""}</span>
+					</p>
+				</div>
+				<div class="adr">
+					<span class="adr_t">地址详细</span>
+					<p class="adr_mess">{$result.address.province|default:""}{$result.address.city|default:""}{$result.address.area|default:""}{$result.address.details|default:""}</p>
+				</div>
+			</div>
+		</div>
+		<!--展示商品-->	
+		<div class="goodsBox">
+			<!--每个商品-->
+			{foreach $result.list as $key=>$val}
+			<div class="shop">
+				<img src="{$val.shop_img}" class="shopImg">
+				<div class="shop_m">
+					<span class="s_name">{$val.shop_name}</span>
+					<p class="s_price">
+					{if $result.order_method eq 2}
+					<span class="s_p_jq">{$val.shop_price}</span>元
+					{else if $result.order_method eq 1}
+					<span class="s_p_jd">{$val.shop_integral/100}</span>金点
+					{/if}
+					</p>
+					<p class="spri_num">数量：<span class="sPnumber">{$val.num}</span></p>
+					<!--已完成  显示申请售后-->
+					<!-- <span class="shouhou">申请售后</span> -->
+				</div>
+			</div>
+			{/foreach}
+		</div>
+		<input type="hidden" class="statee" value="{$result.state}">
+		<div class="loadmore" onclick="showmore(this);" style="display: none;">点击查看更多>></div>
+		<!--合计-->
+		<div class="bot_god">
+			<p class="god">共<span class="godnum">{$result.total}</span>件商品</p>
+			<p class="god_hj">合计：<span class="god_jd"></span>
+			{if $result.order_method eq 2}{$result.order_price}元{else}{$result.order_integral}金点{/if}
+			</p>
+			<!--订单状态-->
+			{if $result.stateinfo=='去支付'}
+			<span class="godLSta">
+			<a href="intoJdpay?orderId={$result.order_number}">{$result.stateinfo}</a>
+		 	</span>{else if $result.stateinfo=='查看订单'}{/if}
+			<!-- <span class="godLSta">查看物流</span> -->
+		</div>
+		<!--固定底部--><!--商家已发货等待收货-->
+		{if $result.state eq 3}
+		<footer>
+			<span class="wlbtn footbtn">查看物流</span>
+			<span class="yanc footbtn">延长收货</span>
+			<span class="surebtn footbtn">确认收货</span>
+		</footer>
+		{/if}
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/s/js/orderDet.js"></script>
+	<script>
+	var re=$('.statee').val();
+	//倒计时出现-div高度变高
+	if($('.djs').is(':visible')){
+		$('.l_status').addClass('moreHeight');
+	}
+	if(re==3){
+		$(function(){
+			//显示总计
+			setAll();
+			//倒计时
+			GetRTime();
+		})
+	}
+	
+	</script>
+</html>

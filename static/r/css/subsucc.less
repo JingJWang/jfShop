@@ -1,0 +1,113 @@
+.rem(@w:0px,@h:0px){
+    width: @w/2/20;
+    height: @h/2/20;
+}
+.wid(@wd:0px){
+	width: @wd/40;
+}
+.hei(@ht:0px){
+	height: @ht/40;
+}
+.lineh(@lh:0px){
+	line-height: @lh/40;
+}
+.fs(@fs:0px){
+	font-size: @fs/40;
+}
+.heiline(@gao:0px,@linegao:0px){
+    height: @gao/2/20;
+    line-height: @linegao/2/20;
+}
+.font(@size:0px,@hg:0px){
+    font-size: @size/2/20;
+    line-height: @hg/2/20;
+}
+.pad(@pt:0px,@pr:0px,@pb:0px,@pl:0px){
+    padding-top: @pt/2/20;
+    padding-right: @pr/2/20;
+    padding-bottom: @pb/2/20;
+    padding-left: @pl/2/20; 
+}
+.mar(@mt:0px,@mr:0px,@mb:0px,@ml:0px){
+    margin-top: @mt/2/20;
+    margin-right: @mr/2/20;
+    margin-bottom: @mb/2/20;
+    margin-left: @ml/2/20; 
+}
+.bgs(@bgw:0px,@bgh:0px){
+	background-size: @bgw/40 @bgh/40;
+}
+body{
+	background: #fff;
+}
+header{
+    width: 100%;
+    padding: 15rem/40 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9;
+}
+.back{
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-top: 15rem/40;
+    display: block;
+    width: 60rem/40;
+    height: 50rem/40;
+    background: url(../img/wback.png) no-repeat;
+    background-size: 15rem/40 32rem/40;
+    background-position: center;
+}
+.headtit{
+    display: block;
+    height: 50rem/40;
+    line-height: 50rem/40;
+    font-size: 0.62rem;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+.list{
+    .rem(640rem,240rem);
+    background: #a97bff;
+}
+.list_img{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    margin-left: -80rem/40;
+    margin-top: 160rem/40;
+    .rem(160rem,160rem);
+    display: block;
+    background-image: url(../img/subsucc.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 4rem 4rem;
+}
+.tit_p{
+    width: 100%;
+    .heiline(45rem,45rem);
+    text-align: center;
+    display: inline-block;
+    color: #5a5a5a;
+    .fs(26rem);
+    margin-top: 110rem/40;
+}
+.seelist{
+    display: block;
+    .rem(550rem,75rem);
+    .lineh(75rem);
+    color: #fff;
+    background: #9161e8;
+    .fs(23rem);
+    margin-left: 45rem/40;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 2rem;
+}
+.seelist:link{color: #fff;}
+.seelist:hover{color: #fff;}
+.seelist:active{color: #fff;}
+.seelist:visited{color: #fff;}

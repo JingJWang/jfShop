@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>全部订单列表</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/list.css">
+		<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	</head>
+
+	<body>
+		<header>
+			<a href="javascript:history.go(-1);" class="back"></a>
+			<span class="headtit">回收订单</span>
+		</header>
+		<ul class="ul_s">
+			<li class="li_stat all li_hover" data="all"  onclick="changClass(this,'all',0);stylescrotop();">全部</li>
+			<li class="li_stat wait" data="wait" onclick="changClass(this,'wait',0);stylescrotop();">待发货</li>
+			<li class="li_stat alreadly" data="alreadly" onclick="changClass(this,'alreadly',0);stylescrotop();">已发货</li>
+			<li class="li_stat complated" data="complated" onclick="changClass(this,'complated',0);stylescrotop();">已完成</li>
+			<li class="li_stat cancles" data="cancles" onclick="changClass(this,'cancles',0);stylescrotop();">已取消</li>
+		</ul>
+		<input type="hidden" id="page" value="0"/>
+		<div class="list">
+			
+		</div>
+		<footer></footer>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/r/ajax/request_list.js"></script>
+	<script>
+		changClass(this,'all',0);
+	</script>
+</html>

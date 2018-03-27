@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>推广-首页</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/promotion/css/pro.css">
+		<link rel="stylesheet" type="text/css" href="../../static/public/css/swiper.3.1.2.min.css">
+	</head>
+	<body>
+		<header>子金点A获取中心</header>
+		<!--轮播图-->
+		<div class="swiper-container"><!--swiper容器[可以随意更改该容器的样式-->  
+		    <div class="swiper-wrapper">  
+		        <div class="swiper-slide"><img src="../../static/i/img/banner1.jpg"></div>  
+		        <div class="swiper-slide"><img src="../../static/i/img/banner1.jpg"></div>  
+		        <div class="swiper-slide"><img src="../../static/i/img/banner1.jpg"></div>  
+		    </div>  
+		    <div class="swiper-pagination"></div><!--分页器-->
+		    <!--帮助-->
+		    <a href="javascript:;" class="help">帮助中心</a>
+		</div> 
+        <!--大喇叭-->
+        <div class="pro">
+        	<p class="pro_p b_g">公告 : 限时活动开启,超大奖励等你来!</p>
+        	<p class="pro_p p_g">
+        		<marquee scrollamount="1" scrolldelay="77" direction="left">动态 : 静静完成了任务,获得50金点   &nbsp;&nbsp;&nbsp;&nbsp;贝壳完成了任务,获得50金点  &nbsp;&nbsp;&nbsp;&nbsp;大海洋完成了任务,获得50金点 </marquee>
+        	</p>
+        </div>
+        <!--任务-->
+        <div class="task">
+        	<span class="t_title">做任务 得金点</span>
+        	<ul class="t_ul">
+        		<li class="t_li" onclick="hoverSty(this);"><a href="javascript:;" class="taska hovera">全部任务</a></li>
+        		<li class="t_li" onclick="hoverSty(this);"><a href="javascript:;" class="taska">未完成任务</a></li>
+        		<li class="t_li" onclick="hoverSty(this);"><a href="javascript:;"  class="taska">活动任务</a></li>
+        		<li class="t_li" onclick="hoverSty(this);"><a href="javascript:;" class="taska">已完成任务</a></li>
+        	</ul>
+        	<div class="ul_box" data="1">
+        		<ul class="task_box one_ul" data="1">
+        		</ul>
+        		<ul class="task_box two_ul" data="2">
+        		</ul>
+        		<ul class="task_box three_ul" data="3">
+        		</ul>
+        		<ul class="task_box four_ul" data="4">
+        		</ul>
+        	</div>
+        </div>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/swiper-3.4.2.jquery.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/promotion/js/pro.js"></script>
+	<script type="text/javascript" src="../../static/promotion/ajax/request_tasklist.js"></script>
+	<script type="text/javascript">  
+		getTaskList();		//getTaskList(this,'all',0);
+		$('.ul_box ul').eq(0).show().siblings().hide();
+	    var mySwiper = new Swiper(".swiper-container",{  
+	        direction:"horizontal", /*横向滑动*/  
+	        loop:true, /*形成环路（即：可以从最后一张图跳转到第一张图*/ 
+	        pagination:".swiper-pagination", /*分页器*/  
+	        autoplay: 2000, /*每隔3秒自动播放*/ 
+	        observer:true, //修改swiper自己或子元素时，自动初始化swiper
+	        observeParents:true //修改swiper的父元素时，自动初始化swiper
+	    }) 
+	    //给轮播图设置宽
+	    var winw = $(window).width();
+	    $('.swiper-container,.swiper-slide,.swiper-slide img').width(winw);
+	</script> 
+</html>

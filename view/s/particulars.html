@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>商城-商品详情</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/s/css/particulars.css">
+		<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	</head>
+	<body>
+		<header>
+			<a href="javascript:history.go(-1);" class="back"></a>
+			<a class="sous" href="Shopsear">二手手机 OPPO</a>
+			<a href="shopcart" class="list"><span class="numberSp">{$count}</span></a>
+		</header>
+		<div class="deta_img">
+			<!--放入商品图片-->
+			<img src="{$result.img}" class="shopImg">
+			<form id="formHui" action="confirmSingle" method="get">
+			<input type="hidden" name="id" class="shopIds" value="{$result.busineid};num=1">
+			</form>
+			<input type="hidden" value="{$result.shopid}" class="shopid"><!--商品id-->
+			<input type="hidden" value="{$result.busineid}" class="busineid">
+			<input type="hidden" value="{$userid}" class="userid">
+		</div>
+		<div class="mess">
+			<p class="m_name">{$result.shopname}</p>
+			<s class="m_s">原价：<span>699</span></s>
+			<p class="price">
+			{if $result.integral eq 0}
+				<span class="pri_jd">{$result.price/100}</span>元
+			{else}
+				<span class="pri_jq">{$result.integral/100}</span>金点
+			{/if}
+			</p>
+			<!-- <p class="price"><span class="pri_jd">{$result.integral/100}</span>金点或<span class="pri_jq">{$result.price/100}</span>元</p> -->
+			<div class="shunum">
+				<span class="num_tit">数量：</span>
+				<span class="jian btnj" onclick="numFun(this,0);changeInp();"></span>
+				<input type="text" name="" class="shownum" readonly="readonly" value="1" data="1">
+				<span class="jia btnj" onclick="numFun(this,1);changeInp();"></span>
+			</div>
+			<p class="by"><span>包邮</span></p>
+			<p class="zh_">
+			{if $result.source eq "ZS"}
+			招商银行
+			{else if $result.source eq "YD"}
+			中国移动
+			{else if $result.source eq "JT"}
+			交通银行
+			{/if}
+			商城兑换价：<span class="zh_f">{$credit}</span>积分/市场价:<span class="zh_y">{$yuanPrice/100}</span>元</p>
+		</div>
+		<!---商品详情-->
+		<div class="cont">
+			<ul class="tab_ul">
+				<li class="tab_li"><span class="li_sp hov_li" onclick="liChange(this);">宝贝详情</span></li>
+				<li class="tab_li"><span class="li_sp" onclick="liChange(this);">服务保障</span></li>
+			</ul>
+			<div class="cont_tab">
+				<!--切换信息-->
+				<!--信息详情-->
+				<div class="c_mess">
+					{$result.content}
+					{if $img|@count >0}
+						{foreach $img as $key=>$val}
+							<img src="{$val}">
+						{/foreach}
+					{/if}
+				</div>
+				<!--服务保障-->
+				<div class="c_mess" style="display: none;">放入服务保障-内容</div>
+			</div>
+		</div>
+		<!--定位中间跳转-->
+		<a href="../../h/init/lists" class="pos_href">卖商品</a>
+		<!--底部-->
+		<footer>
+			<span class="gcart fsp ltiaozhuan" onclick="joinCart()">加入购物车</span>
+			<a href="javascript:;" id="shopgoods" onclick="fromHui()" class="gshop fsp fromHui">立刻购买</a>
+		</footer>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/s/js/particulars.js"></script>
+	<script type="text/javascript" src="../../static/s/ajax/request_particulars.js"></script>
+	<script type="text/javascript">
+		gocartFun();
+		var userid=$('.userid').val();
+		if(userid==''){
+			$('.ltiaozhuan').attr('onclick','tiaozhuan()');
+		}
+		function tiaozhuan(){
+			window.location.href='shopcart';
+		}
+	</script>
+</html>

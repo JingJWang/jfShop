@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>收货地址</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/s/css/sdetail.css">
+		<link href="../../static/public/css/jquery-weui.min.css" rel="stylesheet">
+		<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	</head>
+	<body>
+		<header>
+			<a href="javascript:history.go(-1);" class="back"></a>
+			<p class="headtit">{if $sign eq 'add'}添加{else if $sign eq 'edit'}修改{/if}收货地址</p>
+		</header>
+		<div class="titTop marT">
+			<h1 class="rel_h1">收货地址</h1>
+		</div>
+		<!--收货地址-->
+		<div class="mess">
+		{if $sign eq 'add'}
+		<form id="addAddress" method="post">
+			<div class="mes">
+				<span class="mes_tit">收货人</span>
+				<input type="text" name="name" value="" placeholder="输入您的姓名" class="mes_inp mes_name" onblur="checkName(this)">
+			</div>
+			<div class="mes">
+				<span class="mes_tit">联系电话</span>
+				<input type="text" name="phone" value="" placeholder="输入您的联系电话" class="mes_inp mes_phone" onblur="testMoblie(this)" >
+			</div>
+			<div class="mes">
+				<span class="mes_tit">所在地区</span>
+				<input type="text" name="provice" id="city-picker" class="mes_inp addr_dz" value="" placeholder="请选择省市区县" />
+				<input type="hidden" class="provice" name="province" value="">
+				<input type="hidden" class="city" name="city" value="">
+				<input type="hidden" class="area" name="area" value="">
+				<input type="hidden" name="sign" value="{$sign}">
+				<input type="hidden" class="state" name="state" value="{$state}">
+			</div>
+			<div class="mes">
+				<span class="mes_tit">详细地址</span>
+				<input class="mes_inp xxaddr details" value=""  placeholder="输入选择您的所在地区的详细地址" name="detail">
+			</div>
+			</form>
+		</div>
+		<span class="sureBtn" onclick="addAddress('{$state|default:''}')">确定</span>
+	   {else if $sign eq 'edit'}
+	   <form id="editAddress" method="post">
+			<div class="mes">
+				<span class="mes_tit">收货人</span>
+				<input type="text" name="name" value="{$result.name}"  class="mes_inp mes_name" onblur="checkName(this)">
+				<input type="hidden" name="id" value={$result.addid}>
+			</div>
+			<div class="mes">
+				<span class="mes_tit">联系电话</span>
+				<input type="text" name="phone" value="{$result.phone}" class="mes_inp mes_phone" onblur="testMoblie(this)" >
+			</div>
+			<div class="mes">
+				<span class="mes_tit">所在地区</span>
+				<input type="text"  id="city-picker" name="provices" value="{$result.province} {$result.city} {$result.area}" class="mes_inp addr_dz">
+				<input type="hidden" name="sign" value="{$result.sign}">
+				<input type="hidden" class="provice" name="province" value="{$result.province}">
+				<input type="hidden" class="city" name="city" value="{$result.city}">
+				<input type="hidden" class="area" name="area" value="{$result.area}">
+				<input type="hidden" class="state" name="state" value="{$state}">
+			</div>
+			<div class="mes">
+				<span class="mes_tit">详细地址</span>
+				<input class="mes_inp xxaddr" value="{$result.details}" name="detail">
+
+			</div>
+			</form>
+		</div>
+		<span class="sureBtn" onclick="delAddress({$result.addid},'edit')">确定</span>
+	   {/if}
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/s/ajax/request_address.js"></script>
+	<script src="../../static/public/js/jquery-weui.js"></script>
+	<script src="../../static/public/js/city-picker.min.js"></script> 
+	<script type="text/javascript">
+		$("#city-picker").cityPicker({
+	        title: "选择省市区/县",
+	        onChange: function (picker, values, displayValues) {
+	            $('.provice').attr('value', displayValues[0]);
+	            $('.city').attr('value', displayValues[1]);
+	            $('.area').attr('value', displayValues[2]);
+	        }
+	    });
+	</script>
+</html>

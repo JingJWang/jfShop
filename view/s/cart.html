@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>商城-购物车</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/shopCart.css">
+		<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	</head>
+	<body>
+		<header>
+			<a href="javascript:history.go(-1);" class="back"></a>
+			<span class="tit">购物车</span>
+			{if $result neq ""}
+			<span class="changbj" onclick="showfoot(this);">编辑</span>
+			{/if}
+		</header>
+		<div class="list_box">
+			<!-- 展示商品 -->
+			{if $result neq ''}
+				{foreach $result as $key=>$val}
+					<div class="list">
+						<div class="jfp_shop">
+						{if $val.sources eq "YD"}
+						 	中国移动
+						 {else if $val.sources eq "ZS"}
+						 	招商银行
+						 {else if $val.sources eq "JT"}
+						 	交通银行
+						{/if}
+						商城兑换价：<span>{$val.source->credit}</span>积分<span>&nbsp;&nbsp;市场价:{$val.source->price/100}</span>元</div>
+						<div class="left">
+							<span class="rad" onclick="changeradio(this);"></span>
+							<input type="hidden" class="packageid" value="{$val.packId}">
+						</div>
+						<a href="javascript:;" class="righta">
+							<img src="{$val.img}" class="rig_img" />
+							<div class="right">
+								<span class="shopname">{$val.name}</span>
+								<span class="recyspan">
+								{if $val.price neq 0}
+									<b class="fontrecy">价格： </b>
+									<b class="price">{$val.price/100}</b>
+									<b class="payrecy">元</b>
+								{else}
+									<b class="integral">{$val.integral/100}</b>
+									<b class="payrecy">金点</b>
+								{/if}
+								</span>
+								<div class="shunum">
+									<span class="jian btnj" onclick="numFun(this,0);"></span>
+									<input type="text" name="num" class="shownum" readonly="readonly" data="{$val.num}" value="{$val.num}">
+									<span class="jia btnj" onclick="numFun(this,1);"></span>
+								</div>
+							</div>
+						</a>
+					</div>
+				{/foreach}
+		</div>
+		<!-- 默认底部 -->
+		<footer>
+			<div class="change fir_qx" onclick="allcheck(this);">
+				<span class="changrad"></span>
+				<b class="changfont">全选</b>
+			</div>
+			<!-- 合计 -->
+			<div class="all" style="display: none">
+				<span class="all_tit">合计：</span>
+				<span class="hidShop"></span>
+			</div>
+			<span class="bgnew account" onclick="sCartFun(1);">去结算</span>
+		</footer>
+		<!-- 确认删除弹框 -->
+		<div class="shadow" style="display: none"></div>
+		<div class="last" style="display: none">
+			<div class="last_top">
+				<p class="last_mess">您确定要删除这<span>1</span>种商品吗？</p>
+				<span class="sure sbtn" onclick="remFun(1)">确定</span>
+			</div>
+			<span class="cancel sbtn" onclick="remFun(0);">取消</span>
+		</div>
+		{else}
+			<div class="no_shop">
+				<p class="ns_tit">购物车是空的~</p>
+				<a href="../../s/init/lists" class="no_s_btn sc_gg">去逛逛</a>
+			</div>
+		{/if}
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/s/ajax/request_shopCart.js"></script>
+	<script type="text/javascript" src="../../static/s/js/shopCart.js"></script>
+	<!-- <script>hejiPrice()</script> -->
+</html>

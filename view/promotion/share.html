@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>推广-分享</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/promotion/css/share.css">
+		<link rel="stylesheet" type="text/css" href="../../static/public/css/swiper.3.1.2.min.css">
+	</head>
+	<body>
+		<div class="box">
+			<header>
+				<a href="javascript:history.go(-1);" class="back_th">返回</a>
+				<span class="head_sp">福利领取</span> 
+			</header>
+			<!--注册领取-->
+			<!--页面刷新   只需要content前面的class-->
+			<div class="wlq content">
+				<img src="../../static/promotion/img/people.png" class="userImg" />
+				<span class="name sp"></span>
+				<p class="sp">恭喜您获得<span class="font_c">0.5子金点A</span></p>
+				<span class="last_sp sp">快来领取吧 ! </span>
+				<input type="tel" placeholder="请输入您的手机号码" class="mob inp" onblur=" testMoblie(this);"/>
+				<span class="btn inp" onclick="share();">立刻领取</span>
+			</div>
+			<!--注册成功后,页面刷新-->
+			<div class="ylq content" style="display:none">
+				<img src="../../static/promotion/img/people.png" class="userImg" />
+				<span class="name sp"></span>
+				<p class="last_sp sp"><span class="font_c">0.5子金点A</span>已经发送到<span class="font_c mobile">15210106666</span>账号中</p>
+				<a href="javascript:;" class="btngo inp">立刻使用</a>
+			</div>
+			<div class="tit_top">
+				<span class="line"></span>
+				<span class="tit_sp">活动规则</span>
+				<span class="line"></span>
+			</div>
+			<p class="mess">
+				<span class="mes_p">1. 子金点A仅限新用户领取</span>
+				<span class="mes_p">2. 同一手机账号只可领取一次</span>
+				<span class="mes_p">3. 如有疑问请联系客服</span>
+			</p>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/promotion/ajax/request_taskuser.js"></script>
+</html>

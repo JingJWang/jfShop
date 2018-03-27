@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>任务详情</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/promotion/css/pro.css">
+   </head>
+	<body>
+		<div style="display: none;">
+		  <img src="../../static/promotion/img/hstlogo.png"><!--类似于预加载吧-->
+		</div>
+		<div class="shadow" style="display:none">
+	        <div class="sharefx"><img src="../../static/promotion/img/sharefx.png" alt=""></div>
+	        <div class="treefx"><img src="../../static/promotion/img/treefx.png" alt=""></div>
+	    </div>
+	     <div class="fuzhi" style="position:fixed;top:0;left:0;background:rgba(6,6,6,0.62);width:100%;height:100%;display:none;z-index:99">
+	        <div style="text-align:center;background:#ffffff;margin:150px 0px 0px 0px;padding-top:10px;">长按复制下面链接分享到微信好友</div>
+	        <div style="text-align:center;background:#ffffff;margin:0px 0px 0px 0px;padding-top:10px;">http://z.90storm.com/i/init/ipage</div>
+	    </div>    
+		<header>
+			<a href="javascript:history.go(-1);" class="back_h"></a>子金点A获取中心
+		</header>
+		<div class="task_l">
+			<span class="t_img"><img src="{$result.img}"></span>
+			<div class="task_d">
+				<p class="task_p">{$result.taskname} 
+					{if $result.type eq 2 && $result.cycle gt 1}
+						(循环)
+					{else if $result.type eq 3}
+						(限时任务)
+					{/if} 
+				</p>
+				<p class="t_m">{$result.diff}</p>
+				<p class="task_p c_colorw">奖励   :  <span class="color_span">{$result.reward}</span>子金点A</p>
+				<a href="lookInviPeo?zonghe={$result.taskid}_{$result.invi}" class="seeyq">查看邀请用户</a>
+			</div>
+		</div>
+		<div class="t_box">
+			<p class="t_tit">活动说明</p>
+			<p class="t_mess">
+				{$result.explan}
+			</p>
+		</div>
+		<div class="t_box">
+			<p class="t_tit">任务流程</p>
+			<p class="t_mess">
+				{$result.process}
+			</p>
+		</div>
+		<a href="codeOrLink?id={$result.taskid}" class="huoqu">获取推广链接及二维码</a>
+		<footer class="btnShare">去邀请</footer><!-- onclick="show();" -->
+		<!--弹框-->
+		<div class="shadow" style="display: none;" onclick="hideshad()"></div>
+		<div class="p_last" style="display: none;">
+			<p class="shad_top"><span class="shad_sp">邀请好友</span></p>
+			<p class="tit">选择一种方式邀请好友</p>
+			 <ul class="t_pay">
+				<li class="li_pay weixin">微信</li>
+				<li class="li_pay qq">qq</li>
+				<li class="li_pay sina">新浪微博</li>
+				<li class="li_pay renren">人人</li>
+			 </ul>
+			<!-- <div class="bdsharebuttonbox" data-tag="share_1">
+				<a href="#" class="bds_sqq" onclick="share({$result.taskid})" data-cmd="sqq" title="分享到QQ"></a>
+				<a href="#" class="bds_tsina" onclick="share({$result.taskid})" data-cmd="tsina" title="分享到新浪微博"></a>
+				<a href="#" class="bds_renren" onclick="share({$result.taskid})" data-cmd="renren" title="分享到人人网"></a>
+				<a href="#" class="bds_weixin" onclick="share({$result.taskid})" data-cmd="weixin" title="分享到微信"></a>
+			</div>-->
+		</div>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/promotion/js/pro.js"></script>
+	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<script type="text/javascript" src="../../static/promotion/ajax/request_taskmess.js"></script>
+	<script>
+	wx.config({
+	    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+	    appId: "{$result.signPackage.appId}", // 必填，公众号的唯一标识appId
+	    timestamp: {$result.signPackage.timestamp}, // 必填，生成签名的时间戳
+	    nonceStr: "{$result.signPackage.nonceStr}",
+	    signature: "{$result.signPackage.signature}",
+	    jsApiList: ['onMenuShareTimeline','onMenuShareQQ'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	});
+	wx.ready(function(){
+	    // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+	    //微信分享到朋友圈
+		wx.onMenuShareTimeline({
+		    title: '邀请小伙伴来注册', // 分享标题
+		    link: '{$result.taskshareurl}', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+		    imgUrl: '{$result.shareImg}', // 分享图标
+		    success: function (res) {
+				var APP='{$result.homeImg}';
+				var taskid="{$result.taskid}";
+				var invi="{$result.invi}";
+		    	var u=APP;
+		    	var d='suiji='+invi+'&id='+taskid;
+		    	var f=function(res){
+		    		var response=eval(res);
+		    		if(response['status'] == '30010'){
+		    			alert("分享成功");
+		    			$('.shadow').hide();
+		    		}else{
+	                    alert('分享失败');
+	                } 
+		    	}
+		    	conv.httpRequest(u,d,f);
+		      },
+			cancel: function () {
+				// 用户取消分享后执行的回调函数
+				$('.shadow').hide();
+			}
+		});
+		//微信分享到qq
+		wx.onMenuShareQQ({
+			title: '', // 分享标题
+			desc:'',//描述
+			link: '', // 分享链接
+			imgUrl: '', // 分享图标
+			success: function () {
+			// 用户确认分享后执行的回调函数
+			},
+			cancel: function () {
+			// 用户取消分享后执行的回调函数
+			}
+		});
+	});</script>
+</html>

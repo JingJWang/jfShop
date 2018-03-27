@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>我的订单</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/busine/css/issue.css">
+	</head>
+	<body>
+		<header>
+			<span class="tit">我的订单</span>
+		</header>
+		<ul class="list_top">
+			<li class="lt_li" onclick='changeli(this);getList("buy")'><span class="lt_sp hov_lisp">已买</span></li>
+			<li class="lt_li" onclick="changeli(this);getList(sell)"><span class="lt_sp">已卖</span></li>
+		</ul>
+		<div class="l_box">
+			<!--已买-->
+			<ul class="list_box buyorder">
+				
+			</ul>
+			<!--已卖-->
+			<ul class="list_box sellorder" style="display: none;">
+				<li class="listLi">
+					<div class="li_tit">
+						<span class="lit">商品名称</span>
+						<span class="lit">价格 / 数量</span>
+						<span class="lit">成交时间</span>
+					</div>
+					<div class="li_tit">
+						<span class="litwo">美的电饭煲</span>
+						<span class="litwo"><b class="l_price">255</b><b class="l_pay">金点</b> / <b class="l_number">2</b></span>
+						<span class="litwo">2018.2.2 15:20</span>
+					</div>
+				</li>
+				<li class="listLi">
+					<div class="li_tit">
+						<span class="lit">商品名称</span>
+						<span class="lit">价格 / 数量</span>
+						<span class="lit">成交时间</span>
+					</div>
+					<div class="li_tit">
+						<span class="litwo">美的电饭煲</span>
+						<span class="litwo"><b class="l_price">255</b><b class="l_pay">金点</b> / <b class="l_number">2</b></span>
+						<span class="litwo">2018.2.2 15:20</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+	<body>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	<script type="text/javascript" src="../../static/busine/js/buscom.js"></script>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/busine/ajax/request_mylist.js"></script>
+	<script>
+	getList("buy");
+	</script>
+</html>

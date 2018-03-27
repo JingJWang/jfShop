@@ -1,0 +1,155 @@
+body{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.box{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 16rem;
+	height: 100%;
+	background-image: url(../img/bg.jpg);
+	background-size: 100% 100%;
+	background-position: center;
+}
+header{
+	width: 16rem;
+	height: 1.8rem;
+	background: #4a4a4c;
+	z-index: 9;
+	position: relative;
+}
+.head_sp{
+	display: block;
+	width: 100%;
+	height: 1.8rem;
+	line-height: 1.8rem;
+	text-align: center;
+	color: #fff;
+	font-size: 0.62rem;
+}
+.back_th{
+	display: block;
+	height: 1.8rem;
+	line-height: 1.8rem;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-image: url(../../r/img/wback.png);
+	background-size: 0.425rem 0.75rem;
+	background-position:0.7rem center;
+	padding-left: 1.3rem;
+	color: #fff;
+	background-repeat: no-repeat;
+	font-size: 0.6rem;
+}
+.back_th:link{color: #fff}
+.back_th:hover{color: #fff}
+.back_th:visited{color: #fff}
+.back_th:active{color: #fff}
+.content{
+	margin-top: 1.2rem;
+	width: 14.75rem;
+	margin-left: 0.625rem;
+	background: #fff;
+	border-radius: 5px;
+	padding: 1.2rem 0 0.5rem 0;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.userImg{
+	width: 3rem;
+	height: 3rem;
+	border-radius: 50%;
+}
+.sp{
+	width: 100%;
+	text-align: center;
+	height: 1.125rem;
+	line-height: 1.125rem;
+	font-size: 0.53rem;
+	color: #272727;
+}
+.name{
+	margin-bottom: 0.45rem;
+}
+.font_c{
+	color: #fe0000;
+	padding:0 0.2rem;
+	font-size: 0.535rem;
+}
+.last_sp{
+	margin-bottom: 1.5rem;
+}
+.inp{
+	width: 13.125rem;
+	height: 1.85rem;
+	line-height: 1.85rem;
+	border-radius: 5px;
+	font-size: 0.55rem;
+	text-align: center;
+	margin-bottom: 0.6rem;
+}
+.mob{
+	background: #eee;
+}
+.btn{
+	background: #ff4242;
+	color: #fff;
+}
+.btngo{
+	background: #ff4242;
+	color: #fff;
+}
+.btngo:link{color: #fff;}
+.btngo:hover{color: #fff;}
+.btngo:visited{color: #fff;}
+.btngo:active{color: #fff;}
+.tit_top{
+	width: 14.75rem;
+	margin-left: 0.625rem;
+	height: 2rem;
+	position: relative;
+}
+.line{
+	display: block;
+	width: 3.75rem;
+	height: 2rem;
+	border-bottom: solid 1px #ccc;
+}
+.line:first-of-type{
+	float: left;
+	margin-left: 1.65rem;
+}
+.line:last-of-type{
+	float: right;
+	margin-right: 1.65rem;
+}
+.tit_sp{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 1rem;
+	line-height: 1rem;
+	text-align: center;
+	color: #fff;
+	font-size: 0.55rem;
+	margin-top: 1.45rem;
+}
+.mess{
+	margin-top: 0.65rem;
+	padding-left: 1rem;
+	display: block;
+}
+.mes_p{
+	display: block;
+	width: 100%;
+	height: 1.4rem;
+	line-height: 1.4rem;
+	color: #fff;
+	font-size: 0.53rem;
+}

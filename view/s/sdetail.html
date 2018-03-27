@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>商城-确认订单</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/s/css/sdetail.css">
+		<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	</head>
+	<body>
+		<header>
+			<a href="javascript:history.go(-1);" class="back"></a>
+			<p class="headtit">确认订单</p>
+		</header>
+		<form method="post" id="shopOrder" action="sureOrder">
+		{if $addres eq ""}
+		<div class="noaddr"><a >添加收货地址</a></div>
+		<input type="hidden" name="addressId" class="addressId" value="">
+		{else if $addres neq ""}
+		<div class="addr">
+			<div class="addr_tit">
+				<a class="ad_top">
+					<h1 class="rel_h1">收货地址</h1>
+					<input type="hidden" name="addressId" class="addressId" value="{$addres.address_id}">
+				</a>
+				<div class="ad_t">
+					<p class="ad_p">
+						<span class="cl_span">姓名</span>
+						<span class="ad_name">{$addres.address_name}</span>
+					</p>
+					<p class="ad_pa">
+						<span class="cl_span">联系电话</span>
+						<span class="ad_moblie">{$addres.address_phone}</span>
+					</p>
+				</div>
+				<div class="adr">
+					<span class="adr_t">地址详细</span>
+					<p class="adr_mess">{$addres.address_province}{$addres.address_city}{$addres.address_area}{$addres.address_details}</p>
+				</div>
+			</div>
+		</div>
+		{/if}
+		<div class="allshop">
+		   {foreach $getSess as $key=>$val}
+			<div class="shop">
+				<img src="{$val.img}" class="shopImg">
+				<div class="shop_m">
+					<span class="s_name">{$val.shopname}</span>
+					<input type="hidden" name="shopid[]" class="shopid" value="{$val.shopid}">
+					<input type="hidden" name="busineid[]" class="busineid" value="{$val.busineid}">
+					<input type="hidden" name="num[]"" class="num" value="{$val.num}">
+					<input type="hidden" name="packid[]" class="packid" value="{$val.packageid}">
+					<p class="s_price">
+					{if $val.integral neq 0}
+						<span class="s_p_jd integral">{$val.integral/100}</span>金点
+						<input type="hidden" class="methods" value='1'>
+					{else}
+						<span class="s_p_jq price">{$val.price/100}</span>元
+						<input type="hidden" class="methods" value='2'>
+					{/if}
+					&nbsp;&nbsp;*{$val.num}</p>
+				</div>
+			</div>
+		  {/foreach}
+		</div>
+		<!--支付方式-->
+		<!-- <div class="pay">
+			<h1 class="rel_h1">支付方式</h1>
+			<ul class="payUl">
+				<li class="p_li" data="1" onclick="changeHov(this);">
+					<span class="pl_img jdImg"></span>
+					<span class="pl_tit checkH">金点支付</span>
+				</li>
+				<li class="p_li" data="2" onclick="changeHov(this);">
+					<span class="pl_img jqImg"></span>
+					<span class="pl_tit">现金支付</span>
+				</li>
+			</ul>
+			
+		</div> -->
+		<!--服务保障-->
+		<div class="serve">
+			<h1 class="rel_h1">服务保障</h1>
+			<div class="fw">
+				<div class="fw_d">
+					<span class="fw_img fw_one"></span>
+					<p class="fw_tit">售后保障</p> 
+				</div>
+				<div class="fw_d">
+					<span class="fw_img fw_two"></span>
+					<p class="fw_tit">优质货源</p> 
+				</div>
+				<div class="fw_d">
+					<span class="fw_img fw_three"></span>
+					<p class="fw_tit">低价优选</p> 
+				</div>
+			</div>
+		</div>
+		<!--底部-->
+		<footer>
+		 	<input type="hidden" class="hidPay" name="hidPay">
+			<p class="zongj">合计：<span class="num_zj"></span></p>
+			<!-- <span class="tj_list" onclick="insertOrder()">提交订单</span> <span class="dw_zj">金点</span> -->
+			<!-- <input type="submit" class="tj_list" value="提交订单"> -->
+			<span class="tj_list"  onclick="checkaddr()">提交订单</span>
+		</footer>
+		</form>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/s/js/sdetail.js"></script>
+	<script type="text/javascript" src="../../static/s/ajax/request_detail.js"></script>
+	<script>
+		jdFun();
+		getUrlPara();
+		var method=$('.methods').val();//method =1 金点 2 钱
+		var price=0;
+		var integral=0;
+		$('.shop').each(function(){
+			var num=$(this).find('.num').val();
+			var method=$(this).find('.methods').val();//method =1 金点 2 钱
+			if(method==1){
+				integral +=parseInt($(this).find('.integral').html()*num);
+			}else{
+				price+=parseInt($(this).find('.price').html()*num);
+			}
+		});
+		//获取结果值 并赋值
+		if(price>0 && integral>0){
+			$('.num_zj').html(integral+'金点/'+price+'元');
+		}else if(price>0 && integral<=0){
+			$('.num_zj').html(price+'元');
+		}else{
+			$('.num_zj').html(integral+'金点');
+		}
+		//获取当前商品要支付方式
+		var result=$('.num_zj').html();
+		var matchResY=result.match('元');
+		var matchResJ=result.match('金点');
+		if(matchResY!=null && matchResJ!=null){
+			//该订单支付包含钱和金点
+			$('.hidPay').val(3);
+		}else if(matchResY==null && matchResJ!=null){
+			//该订单支付包含金点不包含钱
+			$('.hidPay').val(1);
+		}else if(matchResY!=null && matchResJ==null){
+			//该订单支付包含钱不包含金点
+			$('.hidPay').val(2);//js 里面的跳转方法 orderTijiao
+			/* var url='wxPayShop';
+			$('#shopOrder').attr('action',url); */
+		}else{
+			$('.hidPay').val(0);
+		}
+	</script>
+</html>

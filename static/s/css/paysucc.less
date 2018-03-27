@@ -1,0 +1,206 @@
+.rem(@w:0px,@h:0px){
+    width: @w/2/20;
+    height: @h/2/20;
+}
+.wid(@wd:0px){
+	width: @wd/40;
+}
+.hei(@ht:0px){
+	height: @ht/40;
+}
+.lineh(@lh:0px){
+	line-height: @lh/40;
+}
+.fs(@fs:0px){
+	font-size: @fs/40;
+}
+.heiline(@gao:0px,@linegao:0px){
+    height: @gao/2/20;
+    line-height: @linegao/2/20;
+}
+.font(@size:0px,@hg:0px){
+    font-size: @size/2/20;
+    line-height: @hg/2/20;
+}
+.pad(@pt:0px,@pr:0px,@pb:0px,@pl:0px){
+    padding-top: @pt/2/20;
+    padding-right: @pr/2/20;
+    padding-bottom: @pb/2/20;
+    padding-left: @pl/2/20; 
+}
+.mar(@mt:0px,@mr:0px,@mb:0px,@ml:0px){
+    margin-top: @mt/2/20;
+    margin-right: @mr/2/20;
+    margin-bottom: @mb/2/20;
+    margin-left: @ml/2/20; 
+}
+.bgs(@bgw:0px,@bgh:0px){
+	background-size: @bgw/40 @bgh/40;
+}
+body{
+    width: 100%;
+    height: 100%;
+	background: #f8f8f8;
+}
+header{
+    width: 100%;
+    padding: 15rem/40 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9;
+}
+.header{
+    width: 100%;
+    padding: 15rem/40 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9;
+    background: #fff;
+}
+.back{
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-top: 15rem/40;
+    display: block;
+    width: 60rem/40;
+    height: 50rem/40;
+    background: url(../../r/img/wback.png) no-repeat;
+    background-size: 15rem/40 32rem/40;
+    background-position: center;
+}
+.backa{
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-top: 15rem/40;
+    display: block;
+    width: 60rem/40;
+    height: 50rem/40;
+    background: url(../img/sback.png) no-repeat;
+    background-size: 15rem/40 32rem/40;
+    background-position: center;
+}
+.headtit{
+    display: block;
+    height: 50rem/40;
+    line-height: 50rem/40;
+    font-size: 0.62rem;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+.hedta{
+    color: #496bf0;
+}
+.list{
+    .rem(640rem,240rem);
+    background: #677df5;
+}
+.list_img{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    border-radius: 50%;
+    margin-left: -80rem/40;
+    margin-top: 160rem/40;
+    .rem(158rem,158rem);
+    background-color: #5f77f3;
+    border: solid 0.15rem #f8f8f8; 
+    display: block;
+    background-image: url(../img/paysucc.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 2.4rem 2.4rem;
+}
+.tit_p{
+    width: 100%;
+    .heiline(45rem,45rem);
+    text-align: center;
+    display: inline-block;
+    color: #5a5a5a;
+    .fs(26rem);
+    margin-top: 110rem/40;
+}
+.seelist{
+    display: block;
+    .rem(550rem,75rem);
+    .lineh(75rem);
+    color: #fff;
+    background: #677df5;
+    .fs(23rem);
+    margin-left: 45rem/40;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 2rem;
+}
+.seelist:link{color: #fff;}
+.seelist:hover{color: #fff;}
+.seelist:active{color: #fff;}
+.seelist:visited{color: #fff;}
+// 金点支付
+.jd{
+    width: 100%;
+    height: 120rem/40;
+    border-top: solid 1px #f2f2f2;
+    border-bottom: solid 1px #f2f2f2;
+    margin-top: 2rem;
+    background-image: url(../img/jd_pay.png);
+    background-position: 1.1rem center;
+    background-repeat: no-repeat;
+    background-size: 60rem/40 60rem/40;
+    margin-bottom: 15rem/40;
+}
+.jd_p{
+    .rem(500rem,50rem);
+    .lineh(50rem);
+    padding-left: 3.2rem;
+    .fs(24rem);
+    font-weight: 600;
+    color: #2b2b2b;
+    margin-top: 20rem/40;
+}
+.jd_mess{
+    color: #383838;
+    .rem(500rem,30rem);
+    .lineh(30rem);
+    .fs(21rem);
+    padding-left: 3.2rem;
+}
+.passwd{
+    width: 95%;
+    padding-left: 5%;
+    height: 100rem/40;
+    border-bottom: solid 1px #f0f0f0;
+    .fs(25rem);
+    color: #333;
+}
+.wjpwd{
+    width: 100%;
+    .heiline(55rem,55rem);
+    margin-bottom: 30rem/40;
+}
+.forget{
+    float: right;
+    margin-right: 1rem;
+    .fs(21rem);
+    color: #f92f19;
+}
+.forget:link{color: #f92f19;}
+.forget:hover{color: #f92f19;}
+.forget:visited{color: #f92f19;}
+.forget:active{color: #f92f19;}
+.sureBtn{
+    display: block;
+    margin-left: 50rem/40;
+    text-align: center;
+    .rem(540rem,84rem);
+    background: #4d68f5;
+    color: #fff;
+    .lineh(84rem);
+    .fs(24rem);
+    letter-spacing: 2px;
+    border-radius: 5px;
+}

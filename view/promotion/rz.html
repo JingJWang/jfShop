@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+		<title>邀请用户</title>
+		<link rel="stylesheet" type="text/css" href="../../static/r/css/public.css">
+		<link rel="stylesheet" type="text/css" href="../../static/promotion/css/pro.css">
+	</head>
+	<body>
+		<header>
+			<a href="javascript:history.go(-1);" class="back_h"></a>邀请的用户<span class="help_l"></span>
+		</header>
+		<ul class="tab">
+			<li class="tabli" onclick="changeli(this);"><a href="javascript:;" class="tabl_a tabl_a_hover">已认证用户</a></li>
+			<li class="tabli" onclick="changeli(this);"><a href="javascript:;" class="tabl_a">未认证用户</a></li>
+		</ul>
+		<!--显示认证信息-->
+		<div class="sw_box">
+			<!--已认证-->
+			<div class="yrz_box rebox"></div>
+			<!--未认证-->
+			<div class="wrz_box rebox"></div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../static/public/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../../static/public/js/common.js"></script>
+	<script type="text/javascript" src="../../static/public/js/public.js"></script>
+	<script type="text/javascript" src="../../static/promotion/js/pro.js"></script>
+	<script type="text/javascript" src="../../static/promotion/ajax/request_rz.js"></script>
+	<script>
+	getList();
+	</script>
+</html>
